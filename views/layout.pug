@@ -10,22 +10,23 @@ html(lang="ru")
     body( class =`${ bg ? 'bg':'' }`)
         block header
             header.header
-                .burger-container.js-burger
-                    .burger
-                        span &nbsp;
-                        span &nbsp;
-                        span &nbsp;
-                    .nav-overlay
-                    nav.nav.js-nav
-                        ul.nav__list
-                            li
-                                a(href=`/${ user.account }/${ user.slug}`) Личный кабинет
-                            li
-                                a(href="") Контакты
-                            li
-                                a(href="") О проекте
-                            li
-                                a(href="") FAQ
+                if user
+                    .burger-container.js-burger
+                        .burger
+                            span &nbsp;
+                            span &nbsp;
+                            span &nbsp;
+                        .nav-overlay
+                        nav.nav.js-nav
+                            ul.nav__list
+                                li
+                                    a(href=`/${ user.account }/${ user.slug}`) Личный кабинет
+                                li
+                                    a(href="") Контакты
+                                li
+                                    a(href="") О проекте
+                                li
+                                    a(href="") FAQ
                 .header__logo
                     h1
                         a(href="/")  
