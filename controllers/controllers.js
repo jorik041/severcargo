@@ -46,13 +46,26 @@ function generatePass () {
     });
 }
 
-exports.register = async (req, res, next) => {  
+exports.register = async (req, res, next) => { 
+        
+    const [ driver, sender ] = await Promise.all([ 
+        Driver.findOne({ phone: req.body.phone }),
+        Sender.findOne({ phone: req.body.phone })
+    ]);
+
+    let user = driver || sender;   
+
+    if (user) {
+        req.flash('error', 'Пользователя с таким номером телефона уже существует!');
+        return res.redirect('back');
+    }
 
     const password = generatePass();
     req.body.password = password;
     //добавление в БД
     if (req.body.account ==='sender') {
-        req.session.role = 'sender'
+        req.session.role = 'sender';
+
         Sender.create(req.body);
         // const sender = new Sender({ name: req.body.name, phone: req.body.phone, password: req.body.password });
         // const register = promisify(Sender.register, Sender);
@@ -78,12 +91,14 @@ exports.sendsPassword = (req, res, next) => {
     const msg = Buffer.from(password, 'utf-8').toString();
     const to = req.body.phone;
     const user = 'baytzam@gmail.com';
-    const pass = 'fc79196c876a215a9923f2065ccc58b0';
+    const pass = '8bf2bf2ac229632f82ba37826f2e2daf';
     //запрос к smsaero API для отправки сообщения пользователю 
     const requestPromis = promisify(request.post);
     requestPromis(`https://gate.smsaero.ru/send/?user=${user}&password=${pass}&to=${to}&text=${encodeURIComponent(msg)}&from=news`)
         .then((response) => {
-            if (response.body === 'incorrect destination adress. reject') {
+            console.log( response.body );
+            
+            if (response.body.match( ' reject') ) {
                 req.flash('error', 'Ошибка! На введенный номер телефона невозможно отправить сообщение');
                 res.redirect('back');
             } else {
