@@ -1,0 +1,29 @@
+mixin flight-card(flight)
+	.flight-card__body--right
+		.flight-card__from-to
+			.flight-card__from 
+				span.flight-card__from--icon
+						!= h.icon('arrow-mini-l')
+				h2 #{ flight.from }
+			if (flight.halt.length)
+				ul.flight__halt__list
+					each city in flight.halt
+						li #{city}
+			.flight-card__to
+				span.flight-card__to--icon
+					!= h.icon('arrow-mini-r')
+				h2 #{ flight.to }
+	.flight-card__body--left
+		.flight-card__dispatch #{ h.moment(flight.date,   "MMMM DD, YYYY H:mm", "ru", true ).format("D MMM HH:mm") }
+		.flight-card__coming Прибытие ~ 
+			span #{ h.moment(flight.date,   "MMMM DD, YYYY H:mm", "ru", true ).add('days', 5).format("Do, dddd, MMMM") }
+		.flight-card__views
+			!= h.icon('eye')
+			span 15 просмотров
+		.flight-card__num Рейс S0015
+		if user.account === 'driver'
+			.driver__flights_links
+				a(href=`/flight/edit/${flight.slug}`).flight__links__edit Редактировать
+				a(href="/").flight__links__repeat Повторить
+				a(href=`/search/flight-card/${flight.slug}`).button.driver__btn Перейти к рейсу
+			

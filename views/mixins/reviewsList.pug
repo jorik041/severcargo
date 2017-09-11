@@ -1,0 +1,21 @@
+mixin reviewsList(review)
+    li
+      .reviews__left
+        span.reviews__list_photo
+          img(src=`/uploads/${ review.author.photo || 'sender-ava.svg'}`, alt="")
+      .reviews__center
+        .reviews__center--top
+          spam.reviews__list_author= review.author.name
+          span.review__stars(title=`Оценка ${review.rating} из 5`)
+            -for( let i =0; i < review.rating; i++)
+              .review__star.review__star--yellow
+                != h.icon('star')  
+            -for( let i =0; i < (5 - review.rating); i++)
+              .review__star.review__star--green
+                != h.icon('star')  
+          .reviews__date
+            time(datetime=review.created).reviews__list_date= h.moment(review.created).locale('ru').fromNow()
+        span.reviews__list_text 
+          p= review.text
+       
+

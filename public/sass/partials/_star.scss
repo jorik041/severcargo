@@ -1,0 +1,61 @@
+.star-rating {
+  font-family: 'FontAwesome';
+  margin: 5px auto;
+  text-align: center;
+  font-size: 14px;
+}
+
+fieldset {
+    padding: 0;
+}
+
+.star-rating > fieldset {
+  border: none;
+  display: inline-block;
+}
+.star-rating > fieldset:not(:checked) > input {
+  position: absolute;
+  top: -9999px;
+  clip: rect(0, 0, 0, 0);
+}
+.label__star {
+  position: relative;
+}
+
+.label__star polygon {
+    fill: #ccc;
+    stroke: #ccc;
+    stroke-width: 3px;
+  }
+
+
+.star-rating > fieldset:not(:checked) > label {
+  float: right;
+  width: 1em;
+  padding: 0 .05em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 200%;
+  color: #fdd835;
+}
+// .star-rating > fieldset:not(:checked) > label
+.star-rating > fieldset:not(:checked) > .label__star polygon:hover,
+.star-rating > fieldset:not(:checked) > .label__star polygon:hover ~ label {
+  stroke: var(--main-color);
+  stroke-width: 5px;
+  fill: #fdd835;
+}
+.star-rating > fieldset:not(:checked) > label:hover .label__star polygon,
+.star-rating > fieldset:not(:checked) > label:hover ~ .label__star polygon {
+  fill: #fcd309;
+  stroke: var(--main-color);
+}
+.star-rating > fieldset > input:checked ~  .label__star polygon {
+  fill: #fcd309;
+  stroke: var(--main-color);
+}
+.star-rating > fieldset > label:active {
+  position: relative;
+  top: 2px;
+}

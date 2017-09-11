@@ -1,0 +1,71 @@
+extends layout
+include mixins/flight-card
+include mixins/accountCar
+include mixins/car
+include mixins/reviewsForm
+include mixins/reviewsList
+block content
+		main.main
+			.modal.driver
+				.driver__about
+					.driver__photo
+						img(src=`/uploads/${ driver.photo || 'driver-ava.svg' }`, alt="Водитель")
+					.driver__caption
+						.driver__name 
+							span #{driver.name}
+							span #{driver.surename}
+						.driver__rating
+							if driver.reviews.length
+								- const ratingArr = [];
+								each r in driver.reviews
+									- ratingArr.push(r.rating)
+								- const totalRat = ratingArr.reduce( (prev, curr) => { return prev + curr })
+								- const totalRatRound = Math.round( totalRat / ratingArr.length)
+								-for( let i = 0; i < totalRatRound; i++)
+									.review__star.review__star--yellow
+										!= h.icon('star')  
+								-for( let i = 0; i < (5 - totalRatRound ); i++)
+									.review__star.review__star--green
+										!= h.icon('star') 
+							else 
+								each star in [5, 4, 3, 2, 1]
+									.review__star.review__star--green
+										!= h.icon('star') 
+							span рейтинг
+						.driver__wherefrom #{ driver.city }
+						if user.account === 'driver'
+							.driver__btn_wrap
+								a(href="/account/driver/" class="button driver__btn") Редактировать
+					.driver__tabs
+						input(type="radio" name="tabs" id="flights" hidden checked)
+						label(for="flights" class="driver__tabs__flights " ) Рейсы
+						input(type="radio" name="tabs" id="car" hidden )
+						label(for="car" class="driver__tabs__car ") Автомобиль
+						input(type="radio" name="tabs" id="reviews" hidden )
+						label(for="reviews" class="driver__tabs__reviews") Отзывы
+					.driver__flights
+						if driver.flights.length 
+							ul.driver__flights__list
+								each flight in driver.flights
+									li.driver__flights__item
+										+flight-card(flight)
+						else 
+							h3.else-text Нет ни одного добавленного рейса
+					.driver__car
+						if !driver.cars.length
+							a(href="/").add-link.js-add-car-btn Добавить авто
+								!=  h.icon('add')
+							
+						+accountCar(driver.cars[0])
+						+car( driver.cars[0] )
+						a(href="/").add-link.js-add-car-btn.driver__car--hide Добавить авто
+								!=  h.icon('add')
+	
+					.driver__reviews
+						.reviews
+							ul.reviews__list
+								if driver.reviews
+									each review in driver.reviews
+										+reviewsList(review)
+									if user.account === 'sender'
+										+reviewsForm( driver )

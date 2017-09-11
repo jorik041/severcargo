@@ -1,0 +1,306 @@
+.modal.flights {
+    padding: rem(40px) rem(40px);
+
+    @include laptop {
+        padding-left: rem(20px);  
+        padding-right: rem(20px);          
+    }
+}
+
+.flights__list {
+    margin: 0;
+    padding: 0;
+}
+
+.flights__head {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include tablets {
+        margin-top: 20px;
+        margin-bottom: 0;
+        width: var(--width-on-mobile);
+    }
+}
+
+.flights__body {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    @include tablets {
+        margin-bottom: 10px;
+        width: var(--width-on-mobile);        
+    }
+}
+
+.flights__item {
+    min-height: 180px;
+    border-bottom: 1px solid #dfdfdf;
+    padding-bottom: 30px;
+    --width-on-mobile: 80%;
+    &+.flights__item {
+        padding-top: 20px;
+    }
+
+    &:last-child {
+        border-bottom: none;
+    }
+
+    @include tablets {
+        position: relative;
+        display: flex;
+        flex-direction: column-reverse;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 0;
+        min-height: inherit;
+    }
+}
+
+
+.flights__item__center {
+    --padding: 7.3%;
+    flex-grow: 3;
+    max-width: 490px;
+    border-right: 1px solid #dfdfdf;
+    border-left: 1px solid #dfdfdf;
+
+    @include laptop {
+        width: 280px;
+        border-left: none;
+        border-right: none;
+        max-width: inherit;
+    } 
+
+    @include tablets {
+        --padding: 0;
+    }
+}
+
+.flights__add-date, 
+.flights__type__text, 
+.flights__type__car {
+    font-family: var(--main-fonts);
+    font-size: 15px;
+    color: var( --light-color );
+}
+
+.flights__type {
+    text-align: right;
+}
+
+.flights__type__text {
+    color: var(--light-color);
+}
+
+.flights__type__car {
+    display: inline-block;
+    margin: 0 20px;
+    padding: 10px 15px;
+    color: var(--font-color);
+    font-weight: bold;
+    border-radius: 20px;
+    border: 1px solid #d0d0d0;
+
+    @include tablets {
+        margin-right: 0;
+    }
+}
+
+.flights__item__left,
+.flights__item__right {
+    display: flex;
+    flex-grow: 1;
+}
+
+.flights__item__left {
+    justify-content: flex-start;
+}
+
+.flights__item__right {
+    justify-content: flex-end;
+
+    @include tablets {
+        display: none;
+    }
+}
+
+.flights__number {
+    font-family: var(--font-light );
+    font-size: 25px;
+    line-height: 30px;
+    text-transform: uppercase;
+    margin-right: 15.78%;
+    color: var(--light-color);
+
+    @include laptop {
+        margin-right: 10%;
+    }
+}
+
+.flights__date {
+    display: flex;
+    flex-direction: column;
+    font-family: var(--main-fonts);
+
+    span:nth-child(1) {
+        margin-bottom: 25px;
+        font-size: 25px;
+        font-weight: 400;
+        color: var(--font-color );
+
+        @include tablets {
+            margin-bottom: 0;
+            border-right: 1px solid #dfdfdf;
+            padding: 7px 0;
+            padding-right: 20px;
+            margin-right: 20px;
+        }
+    }
+
+    span:nth-child(2) {
+        color: #bbbbbb;
+        font-size: 15px;
+        font-weight: 300;
+    }
+}
+
+.flights__author {
+    display: inline-block;
+    color: var(--font-color);
+    font-size: 25px;
+    font-weight: 400;
+
+    div {
+        display: inline-block; 
+        margin-left: 10px;    
+        color: var(--light-color);
+        font-size: 18px;
+        font-weight: 300;
+    }
+}
+
+.flights__body .flights__item__left {
+    @include tablets {
+        display: none;
+    }
+}
+
+.flights__date.flights__date__mobile {
+    display: none;
+    border-bottom: 1px solid #dfdfdf;
+    padding-bottom: 20px;
+
+    @include tablets {
+        display: block;
+        width: var(--width-on-mobile);
+    }
+}
+
+.flights__from-to {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 17px;
+    padding: 0 var(--padding);
+}
+
+.flights__from, 
+.flights__to {
+    flex-basis: 35%;
+    color: var(--font-color);
+    font-family: Lato;
+    font-size: rem(25px);
+    font-weight: 400;
+    word-break: break-word;
+    white-space: pre-line;
+
+    @include tablets {
+    
+    }
+}
+
+.flights__from { 
+    margin-right: 20px;
+    text-align: left; 
+}
+.flights__to  { 
+    hyphens: manual;
+    margin-left: 20px;
+    text-align: right; 
+
+    @include laptop {
+        margin-left: 10px;
+    }
+}
+
+.flights__info {
+    padding-left: var(--padding);
+    font-family: var(--main-fonts );
+
+    span:nth-child(1){
+        color: var(--light-color);
+        font-size: 15px;
+        font-weight: 300;       
+    }
+
+    span:nth-child(2) {
+        color: var(--font-color);        
+        font-size: 15px;
+        font-weight: 800;
+    }
+
+    @include tablets {
+        display: none;
+    }
+
+}
+
+.flights__button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-family: var( --main-fonts);
+    font-size: 15px;
+    font-weight: bold;
+    white-space: nowrap;
+    text-decoration: none;
+    color: var(--font-color );
+
+    @include laptop {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+.from-to-arrow {
+    width: 101px;
+    height: 15px;
+}
+
+.flights__go-to {
+    display: none;
+    position: absolute;
+    right: 10px;
+    top: 0;
+    height: 100%;
+    width: 80px;
+    justify-content: center;
+    align-items: center;
+    background: var(--main-color);
+    border-radius: 0 5px 5px 0;
+
+    a {
+        display: inline-block;
+        padding: 100%;
+        font-size: 30px;
+        text-decoration: none;
+        color: var(--font-color);
+    }
+
+    @include tablets {
+        display: flex;
+    }
+}

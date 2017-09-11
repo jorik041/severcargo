@@ -1,0 +1,232 @@
+.modal.driver {
+    margin: 5%;
+}
+
+.driver {
+    position: relative;
+
+    &__name {
+        margin-bottom: 25px;
+        font-family: var(--main-fonts);
+        font-size: 26px;
+        
+        span {
+            margin-right: 10px;
+        }
+    }
+
+    &__wherefrom {
+        margin-bottom: 25px;
+        font-family: var(--main-fonts);
+        font-size: 16px;
+        font-weight: 400;
+        color: var(--light-color);
+    }
+}
+
+.driver__flights__item {
+    padding: 60px 0;
+    border-bottom: 1px solid var( --light-color );
+
+    &:first-child {
+        padding-top: 0;
+    }
+
+    &:last-child {
+        padding-bottom: 0;
+        border-bottom: 0;
+    }
+}
+
+.driver__btn_wrap {
+    width: 100%;
+    margin-bottom: 70px;
+    text-align: center;
+
+    .driver__btn {
+        display: inline-block;
+        width: 100%;
+        color:  var( --header-color );
+        font-family: var( --main-fonts );
+        font-size: 16px;
+        font-weight: 400;
+        text-decoration: none;
+    }
+}
+
+.button-edit {
+    position: absolute;
+    top: 5%;
+    right: 5%;
+    cursor: pointer;
+    -webkit-appearance: none;
+    padding: 0;
+    background: 0 0;
+    border: 0;
+    
+    .fa {
+        font-size: 38px;
+        opacity: 0.3;
+
+        &:hover {
+            opacity: 1; 
+        }
+    }
+}
+
+.driver__about {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.driver__photo {
+    position: relative;
+    border-radius: 50%;
+    background-color: #f2f2f2;
+    width: 184px;
+    height: 184px;
+    overflow: hidden;
+    margin-bottom: 30px;
+
+    img {
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.driver__rating {
+    display: flex;
+    align-items: center;
+    margin-bottom: 25px;
+    font-family: var(--main-fonts);
+    font-size: rem(24px);
+    font-weight: 400;
+
+    span {
+        font-size: 18px;
+        color: var( --light-color );
+        line-height: 30px;
+        margin-left: 14px;
+    }
+}
+
+.driver__tabs {
+    display: flex;
+    color: var( --light-color);
+    font-family: var(--main-fonts);
+    font-size: 20px;
+    padding-bottom: 30px;
+    border-bottom: 3px solid var(--light-color);
+    @include selected-switch(3, 20%, 2px, var(--main-color));
+
+    label {
+        font-family: var( --font-light );
+    }
+}
+
+.driver__about .driver__tabs  {
+    width: 100%;
+}
+
+.driver__tabs__flights,
+.driver__tabs__car,
+.driver__tabs__reviews {
+    cursor: pointer;
+}
+
+.driver__flights,
+.driver__car,
+.driver__reviews {
+    --display: none;
+    margin-top: 60px;    
+    display: var(--display);
+}
+
+.tab-line {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    width: 50px;
+    height: 100%;
+    border-bottom: 5px solid var( --main-color );
+}
+
+.driver__flights {
+    justify-content: space-between;
+    width: 100%;
+    min-height: 210px;
+}
+
+.driver__flights {
+    width: 100%;
+
+    .flight__halt__list{
+        text-align: left;
+    }
+}
+
+.button-add {
+    cursor: pointer;
+    -webkit-appearance: none;
+    padding: 0;
+    background: 0;
+    border: 0;
+    font-size: 95px;
+    color: var(--light-color);
+
+    &__icon {
+        height: 50px;
+        width: 50px;
+
+        polygon {
+            fill: var(--light-color);
+        }
+    }
+}
+
+.driver__flights_links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: auto;
+    width: 90%;
+
+    a {
+        color: #0086bf;
+        text-decoration: none;
+        font-family: var(--font-light);
+    }
+
+    .driver__btn {
+        color: var(--font-color);            
+    }
+
+}
+
+.driver__reviews {
+    width: 100%;
+
+    .form {
+        width: 100%;
+    }
+}
+
+.driver__btn {
+    padding: 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+}
+.driver__flights__list {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+div.driver__car--hide, a.driver__car--hide {
+    display: none;
+}

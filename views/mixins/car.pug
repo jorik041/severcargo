@@ -1,0 +1,16 @@
+mixin car(car = {})
+	form(action=`/add-car/${car._id || ''}`, method="POST" id="form2" enctype="multipart/form-data" ).form.add-car.add-flight__form.js-add-car
+		.add-flight__form__title автомобиль
+		.form__group
+			input(type="text" name="model" class="form__input" placeholder="Марка, модель" value=car.model)
+		.form__group
+			input(type="text" name="type" class="form__input" placeholder="Тип" value=car.type)
+		.form__group
+			input(type="text" name="number" class="form__input" placeholder="Гос. номер" value=car.number)
+		.form__group
+			input(type="file" id="images" onchange="PreviewImage();" name="photo" accept=".jpg, .png, .jpeg, .gif, .bmp" multiple hidden)
+			label(for="images").add-picture
+				img(src="/images/camera.png", alt="Перетащите или выберите фотографии для загрузки")
+				span Перетащите или выберите фотографии для загрузки
+			ul.preview__list
+		button.button.form__button.js-submit-car Добавить

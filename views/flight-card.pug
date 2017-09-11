@@ -1,0 +1,33 @@
+extends layout
+include mixins/flight-card
+block content
+		main.main
+			.modal.flight-card
+				.flight-card__header
+					h1.flight-card__header__point #{ flight.from } 
+					span
+						!= h.icon('arrow_right')
+					h1.flight-card__header__point #{ flight.to }
+				.flight-card__body
+					.flight-card__title общая информация
+					+flight-card(flight)
+					.flight-card__driver
+						.flight-card__title контактная информация
+						.flight-card__row
+								.flight-card__driver__phone +7 (922) xxx-xx-xx
+								a(href="/" ).flight-card__driver__btn Связаться с водителем
+						.flight-card__row
+								.flight-card__driver_about
+									a(href=`/driver/${flight.author.slug}`).driver__photo
+										img(src=`/uploads/${ flight.author.photo || 'driver-ava.svg' }`, alt="Водитель")
+									.driver__info
+											include partials/_rating
+											.driver__name #{flight.author.name} 
+											span Водитель
+						.flight-card__row
+							.flight-card__car_about
+									span.driver__car__pic
+										img(src=`/uploads/${flight.cars[0].photo.length ? flight.cars[0].photo : 'truck.svg'}`, alt="")
+									.driver__car-info
+											.driver__car-model #{flight.cars[0].model} 
+											.driver__car-type #{flight.cars[0].type}

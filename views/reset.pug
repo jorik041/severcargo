@@ -1,0 +1,11 @@
+extends layout
+block content
+    main.main.main-bg
+        .modal.form
+            form( method="POST")
+                .form__header
+                    .form__title На ваш телефон был выслан новый пароль
+                .form__group
+                    input(type="password" name="password" class="form__input" placeholder="Введите пароль")
+                .form__group
+                    button.button.form__button Подтвердить

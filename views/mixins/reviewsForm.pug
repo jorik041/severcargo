@@ -1,0 +1,9 @@
+mixin reviewsForm( driver )
+  form(action=`/reviews/${ driver._id}`, method="POST").form.js-form-review
+    .form__group
+      textarea(name="text", placeholder="Оставьте ваш отзыв... ").form__textarea
+    .form__group
+      .reviews__meta
+        .reviews__rating
+          include ../partials/_rating
+    button.button.form__button.js-submit-review Добавить

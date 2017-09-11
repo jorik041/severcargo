@@ -1,0 +1,95 @@
+
+.main.add-flight {
+    padding: 0 10px;
+}
+
+
+
+.add-flight {
+
+    &__header {
+        padding: 0 rem(110px);
+        padding-bottom: rem(20px);
+        margin-bottom: rem(43px);
+        border-bottom: 1px solid #c4c4c4;
+    }
+    &__title {
+        font-family: var(--main-fonts);
+        font-size: rem(35px);
+        font-weight: 400;
+        margin-bottom: rem(25px);
+    }
+
+    &__form__title {
+        font-family: 'Lato';
+        font-size: rem(18px);
+        text-transform: uppercase;
+        margin-bottom: rem(35px);
+        padding-left: 20px;
+    }
+
+    .form {
+        padding: 0 rem(110px);
+        padding-bottom: rem(50px);
+    }
+}
+
+.add-flight__form {
+    border-bottom: 1px solid #c4c4c4;
+    margin-bottom: rem(50px);
+}
+
+.add-picture {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 232px;
+    cursor: pointer;
+    border-radius: 11px;
+    border: 2px dashed #b8b8b8;
+
+    img {
+        margin-bottom: 20px;
+    }
+
+    span{
+        color: #939393;
+        font-family: var(--main-fonts);
+        font-size: 20px;
+        font-weight: 300;
+    }
+}
+
+.preview__list {
+    display: flex;
+    padding: 0;
+    li {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        margin: 0 5px;
+    }
+
+    img{
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.preview__img-remove {
+    position: absolute;
+    right: 0;
+    border: 0;
+    font-size: 18px;
+    color: #fff;
+    background: #000;
+    border-radius: 50%;
+    cursor: pointer;
+    
+    &:hover {
+        color: var(--main-color);
+    }
+}

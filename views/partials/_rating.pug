@@ -1,0 +1,17 @@
+.star-rating
+  fieldset
+    input#star5(type='radio', name='rating', value='5')
+    label(for='star5', title='Outstanding' class="label__star")
+      != h.icon('star')
+    input#star4(type='radio', name='rating', value='4')
+    label(for='star4', title='Very Good' class="label__star")
+       != h.icon('star')     
+    input#star3(type='radio', name='rating', value='3')
+    label(for='star3', title='Good' class="label__star")
+       != h.icon('star')    
+    input#star2(type='radio', name='rating', value='2')
+    label(for='star2', title='Poor' class="label__star")
+       != h.icon('star')     
+    input#star1(type='radio', name='rating', value='1')
+    label(for='star1', title='Very Poor' class="label__star")
+       != h.icon('star') 

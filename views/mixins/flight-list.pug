@@ -1,0 +1,34 @@
+mixin flights(flights)
+    ul.flights__list
+        - for (let flight of flights)
+            li.flights__item
+                .flights__go-to 
+                    a(href=`/search/flight-card/${flight.slug}`) >
+                span.flights__head
+                    .flights__add-date=`Добавлено ${ h.moment(flight.created_at).locale('ru').fromNow() }`
+                    .flights__type
+                        span.flights__type__text Тип автомобиля
+                        span.flights__type__car  #{ flight.cars.type }
+                .flights__date.flights__date__mobile
+                    span=`${ h.moment(flight.date, "MMMM D, YYYY H:mm", "ru", true ).format("DD.MM") }`
+                    div.flights__author #{flight.author.name}
+                        div водитель
+                span.flights__body
+                    span.flights__item__left
+                        .flights__number S001
+                        .flights__date 
+                            span=`${ h.moment(flight.date, "MMMM D, YYYY H:mm", "ru", true ).format("DD.MM") }`
+                            span Отбытие
+                    span.flights__item__center
+                        .flights__from-to
+                            .flights__from #{flight.from}
+                            svg(class="from-to-arrow" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="677" height="74" viewBox="0 0 677 74")
+                                image(id="Слой_0" data-name="Слой 0" width="677" height="74" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAAqUAAABKCAMAAAC1i91+AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAACkVBMVEX92DX////92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DX92DUAAACjPDNBAAAA2XRSTlMAAAMBBBRySRACTfTwuYRIGDDo78OLTh8l3f378suSVyMv8f78+NCYXidL1KFkLghq26hrNgqU4q90Og4J1ee1fEE56b6CRxnEiVEdBtLJViLPmVwpwvnXoD/cpm0zC7PgcxFE5bd7QhMF670XdsEcypFVJK730Shm1mUt+tqpbDQM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")
+                            .flights__to #{flight.to}
+                        .flights__info
+                            span Вес и объем: 
+                            span 1500 кг, 150 м3
+                    span.flights__item__right
+                        a(href=`/search/flight-card/${flight.slug}`).button.flights__button Перейти к рейсу
+                
+        

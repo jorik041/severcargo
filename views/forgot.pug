@@ -1,0 +1,11 @@
+extends layout
+block content
+    main.main.main-bg
+        .modal.form
+            form(action="/account/forgot" method="POST")
+                .form__header
+                    .form__title Укажите номер телефона введенный при регистрации
+                .form__group
+                    input(type="phone" name="phone" class="form__input" placeholder="Введите номер телефона")
+                .form__group
+                    button.button.form__button Отправить

@@ -1,0 +1,21 @@
+extends layout
+include mixins/car
+include mixins/flightForm
+block content
+	main.main.add-flight
+		.modal
+			if user.account === 'driver'
+				.add-flight__header 
+						.add-flight__title Добавить рейс
+				+flightForm(flight)
+				if !car
+					+car()
+				button(onclick="submitForms()").button.form__button Добавить     
+			else 
+				h2 Для того чтобы добавить рейс вам необходимо зарегистрировать аккаунт водителя             
+block scripts
+	script(src="js/flatpickr.min.js")
+	script(src="js/date.js")
+	script(src="js/form.js")
+
+		

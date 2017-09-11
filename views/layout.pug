@@ -1,0 +1,71 @@
+doctype html
+html(lang="ru")
+    head
+        title= `${title} | ${h.siteName}`
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="stylesheet", href="/dist/css/style.css")
+    block params
+    body( class =`${ bg ? 'bg':'' }`)
+        block header
+            header.header
+                .burger-container.js-burger
+                    .burger
+                        span &nbsp;
+                        span &nbsp;
+                        span &nbsp;
+                    .nav-overlay
+                    nav.nav.js-nav
+                        ul.nav__list
+                            li
+                                a(href=`/${ user.account }/${ user.slug}`) Личный кабинет
+                            li
+                                a(href="") Контакты
+                            li
+                                a(href="") О проекте
+                            li
+                                a(href="") FAQ
+                .header__logo
+                    h1
+                        a(href="/")  
+                            img(src="/images/logo.png", alt="")
+                            span северкарго
+                .user
+                    if user
+                        if user.account == "driver"
+                            a(href="/add-flight").user__add.button Добавить рейс
+                        span.header__search
+                            !=  h.icon('search')
+                            a(href="/search").user__search Найти рейс
+                        .user__info
+                            .user__name #{ user.name }
+                            .user__ava-wrapper.js-show-header-menu
+                                .user__ava
+                                    if user.account == "driver"
+                                        img(src=`/uploads/${ user.photo || "driver-ava.svg" }`, alt="Водитель")
+                                    else
+                                        img(src=`/uploads/${ user.photo || "sender-ava.svg" }`, alt="Отправитель", class="ava-preview")
+                                .user__profile-menu
+                                    ul.profile-menu__list
+                                        li
+                                            a(href=`/${ user.account }/${ user.slug}`) Личный кабинет
+                                        li
+                                            a(href="/logout").user__logout Выйти
+                    else
+                        .user-wrapper
+                            a(href="/register").user__register Регистрация
+                            a(href="/login").user__login Войти
+        block messages
+            if locals.flashes
+                .inner
+                    .flash-messages
+                        - const categories = Object.keys(locals.flashes)
+                        each category in categories
+                            each message in flashes[category]
+                                .flash(class=`flash--${category}`)
+                                    p.flash__text!= message
+                                    button.flash__remove(onClick="this.parentElement.remove()") &times;
+        block content
+    block scripts
+        script(src="../../js/main.js")

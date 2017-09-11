@@ -1,0 +1,84 @@
+@function rem($px) {
+	@return  $px / 16px + 0rem;
+}
+
+@mixin largemore {
+	@media screen and (max-width: 1920px) {
+		@content;
+	}
+}
+
+@mixin large {
+	@media screen and (max-width: 1440px) {
+		@content;
+	}
+}
+
+@mixin desktop {
+	@media screen and (max-width: 1200px) {
+		@content;
+	}
+}
+@mixin laptop {
+	@media screen and (max-width: 992px) {
+		@content;
+	}
+}
+@mixin tablets {
+	@media screen and (max-width: 768px) {
+		@content;
+	}
+}
+@mixin phones {
+	@media screen and (max-width: 480px) {
+		@content;
+	}
+}
+
+
+
+@mixin selected-switch($_total: 2, $_width: 20%, $_margin: 1px, $_active: black){
+	$_containerWidth: $_width * $_total;
+	width: $_containerWidth;
+	position: relative;
+	display: flex;
+	justify-content: flex-start;
+	align-items : center;	
+	z-index: 1;
+	label {
+		flex-basis: $_width;
+		cursor: pointer;
+		display: flex;
+		justify-content: flex-start;
+		align-items : center;
+		transition: .4s ease all;
+		&:last-of-type:before{
+            content: "";
+            width: $_width;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+			border-bottom: 3px solid var(--main-color);
+            transform: translate3d(0, 0, 0);
+            transition: .4s ease all;
+            will-change: transform, transition;
+		}
+	}
+	
+	> input:checked + label{
+		color: #000;
+		transition: 1s ease all;
+	}
+	@for $i from 1 through $_total{
+		$index: $i - 1;
+		input:nth-of-type(#{$i}):checked{
+			~ label:last-of-type:before{
+				transform: translate3d(($index*100%), 0, 0);
+				will-change: transform, transition;
+			}
+		}
+	}
+}
+

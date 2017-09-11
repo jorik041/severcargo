@@ -1,0 +1,84 @@
+.modal.account {
+    margin-top: 5%;
+}
+
+.account__header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #c4c4c4;
+}
+
+.account__header, 
+.account__body {
+    padding-left: 120px;
+    padding-right: 120px;
+    margin: auto;
+    margin-bottom: 40px;        
+}
+
+.account__avatar {
+    position: relative;
+    width: 139px;
+    height: 140px;
+    background-color: #f8f8f8;
+    border-radius: 50%;
+    overflow: hidden;
+
+    cursor: pointer;
+
+    img {
+        cursor: pointer;
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+.account__info {
+    margin-left: 25px;
+}
+
+.account__name {
+    font-family: var(--main-fonts);
+    font-size: 28px;
+    font-weight: 400;
+
+    span {
+        margin-right: 10px;
+    }
+}
+
+.account__user-from {
+    font-family: var(--main-fonts);
+    color: #777777;
+    font-size: 20px;
+    line-height: 29px;
+}
+
+.account__title {
+    font-family: var(--main-fonts);
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 35px;
+}
+
+.form__text {
+    font-family: var(--main-fonts);
+    font-size: 14px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.form__group .form__input-change_pass {
+    margin-bottom: 10px;
+}
+
+.edit-photo {
+    cursor: pointer;
+    position: absolute;
+    left: 0%;
+    top: 60%;
+}

@@ -1,0 +1,92 @@
+.burger-container  {
+  position: absolute;
+  width: 35px;
+  z-index: 1060;
+  top: calc( 50% - 10px);
+  left: 25px;
+  --transition: all ease-in-out 0.4s;
+}
+
+.burger {
+  position: relative;
+  z-index: 1050;
+  cursor: pointer;
+  display: block;
+}
+
+.burger span{
+  display: block;
+  background-color: var( --main-color );
+  width: 35px;
+  height: 3px;
+  margin-bottom: 5px;
+  position: relative;
+  top: 0;
+  transition: var(--transition);
+}
+
+.burger-container.open span:nth-child(2){
+  width: 0;
+  opacity: 0;
+}
+
+.burger-container.open span:nth-child(3){
+  transform: rotate(-45deg);
+  top: -8px;
+}
+
+.burger-container.open span:nth-child(1){
+  transform: rotate(45deg);
+  top: 8px;
+}
+
+.nav-overlay {
+  display: none;
+  position: fixed; top: 0;bottom: 0;right: 0;left: 0;
+  z-index: 99;
+  background-color: rgba(0,0,0, .6)
+}
+
+.nav {
+  --width: 350px;
+  --transition: all ease-in-out 0.4s;
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  width: 100%;
+  max-width: var(--width);
+  left: calc( var( --width ) - 1000%);
+  height: 100vh;
+  background-color: var( --header-color );
+  box-shadow: 10px 20px 30px rgba(0,0,0, .3);
+  transition: var(--transition);
+}
+
+.nav__list {
+  margin-top: var(--header-height);
+  text-align: right;
+  font-family: var( --main-fonts );
+  color: var( --text-color );
+
+  li {
+    padding-right: 5px;
+    border-right: 3px solid transparent;
+    transition: all .3s ease;
+    
+    &:hover {
+      border-right-color: var(--main-color);
+      background-color: #222;
+    }
+
+    a {
+      display: inline-block;
+      width: 100%;
+      padding: 10px;
+    }
+  }
+}
+
+.nav.open {
+  left: 0;
+}

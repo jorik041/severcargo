@@ -1,0 +1,34 @@
+extends layout
+block content
+    main.main
+        .modal.account
+            form(action="/account/driver" method="POST" enctype="multipart/form-data").form
+                .account__header
+                    .account__avatar
+                        input(type="file" id="add-photo" name="photo" onchange="PreviewAva();" hidden)
+                        label(for="add-photo")
+                            img(src=`/uploads/${user.photo || 'driver-ava.svg'}`, id="ava-preview" alt="Фото водитлея")
+                            !=  h.icon('foto')
+                    .account__info
+                        .account__name
+                            span #{user.name}
+                            span #{user.surename}
+                        .account__user-from #{user.city}
+                .account__body
+                    .account__title Личная информация
+                    .account__form
+                        .form__group
+                            input(type="text" name="name" class="form__input" placeholder="Имя" value=user.name)
+                        .form__group
+                            input(type="text" name="surname" class="form__input" placeholder="Фамилия" value=user.surename)
+                        .form__group
+                            input(type="phone" name="phone" class="form__input" placeholder="Телефон" value=user.phone)
+                        .form__group
+                            input(type="text" name="city" class="form__input" placeholder="Ваш город" value=user.city)
+                        .form__group
+                            .form__text Сменить пароль
+                            input(type="password" name="password" class="form__input form__input-change_pass" placeholder="Старый пароль")
+                            input(type="password" name="new-password" class="form__input form__input-change_pass" placeholder="Новый пароль")
+                            input(type="password" name="confirm-password" class="form__input form__input-change_pass" placeholder="Подтвердить новый пароль")
+                        .form__group
+                            button.button.form__button Сохранить

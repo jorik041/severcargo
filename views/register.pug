@@ -1,0 +1,23 @@
+extends layout
+block params 
+    - let bg = true;
+block content
+    main.main.main-bg
+        .modal.form
+            form(action="/register" method="POST").form
+                .form__header
+                    .form__title Регистрация
+                    .form__select-account
+                        input(type="radio" name="account" value="sender" id="sender" hidden)
+                        label(for="sender" class="form__select-acc__label") Отправитель
+                        input(type="radio" name="account" value="driver" id="driver" hidden)
+                        label(for="driver" class="form__select-acc__label") Водитель
+                .form__group
+                    input(type="text" name="name" class="form__input" placeholder="Имя")
+                .form__group
+                    input(type="phone" name="phone" class="form__input" placeholder="Телефон")
+                .form__group
+                    button.button.form__button Регистрация
+            .already-register
+                span Есть аккаунт? 
+                    a(href="/login") Вход

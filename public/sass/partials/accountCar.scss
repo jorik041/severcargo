@@ -1,0 +1,71 @@
+.driver__car {
+  width: 100%;
+  justify-content: center;
+
+  .add-car {
+    display: none;
+    opacity: 0;
+    transition: .8s;
+
+    button {
+        display: block;
+    }
+  }
+}
+.driver__car__item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.driver__car--left {
+  flex-basis: 60%;
+}
+
+.driver__car--right {
+  flex-basis: 40%;
+}
+
+.driver__car__img-wrapp {
+  width: 436px;
+  height: 285px;
+  background-color: #f8f8f8;
+  border-radius: 5px;
+  padding: 10px;
+
+  img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.driver__car__info {
+  text-align: left;
+  font-family: var(--main-fonts);  
+}
+
+.driver__car__model {
+  margin-bottom: 15px;
+  color: var(--font-color);
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.driver__car__number {
+  margin-bottom: 35px;
+  color: var( --light-color );
+  font-size: 20px;
+  font-weight: 100;
+}
+
+.driver__car__edit, 
+.driver__car__remove {
+    display: inline-block;
+    text-decoration: none;
+    color: var( --font-color );
+}
+
+.driver__car__edit {
+  margin-right: 30px;
+}

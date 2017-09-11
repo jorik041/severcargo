@@ -1,0 +1,14 @@
+extends layout
+include mixins/car
+include mixins/flightForm
+block content
+  main.main.add-flight
+    .modal
+      .add-flight__header 
+        .add-flight__title#title
+        +flightForm(flight)
+        button(onclick="submitForms()").button.form__button Добавить
+block scripts
+  script(src="../../js/flatpickr.min.js")
+  script(src="../../js/date.js")
+  script(src="../../js/form.js")

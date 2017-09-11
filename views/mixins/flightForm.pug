@@ -1,0 +1,23 @@
+mixin flightForm( data = {} )
+  form(action=`/add-flight/${ data.slug || '' }`, method="POST" id="form1").form.add-flight__form
+    .add-flight__form__title место отправки
+    .form__group.js-form__group
+      .form__group__two-input.js-form__group__two
+        input(type="text" name="from" class="form__input form__input--unborder " placeholder="Укажите место отправки" value=data.from)
+        input(type="text" name="date" class="form__input form__input--unborder js-input-date" placeholder="Укажите дату отправки" value=data.date)
+        a(class="js-threeline" title="Календарь")
+          !=  h.icon('threeline')
+        a(class="js-cancel" title="Очистить")
+          !=  h.icon('cancel')
+      span.form__add-field.js-add-field-date + Добавить место отправки
+    .add-flight__form__title место прибытия
+    .form__group
+      input(type="text" name="to" class="form__input" placeholder="Укажите место прибытия" value=data.to)
+    .add-flight__form__title промежуточные пункты
+    .form__group
+      if ( data.halt )
+        each item in data.halt
+          input(type="text" name="halt" class="form__input js-add-place form__input_halt" placeholder="Укажите места в которых вы планируете остановится" value=item)
+      else
+        input(type="text" name="halt" class="form__input js-add-place form__input_halt" placeholder="Укажите места в которых вы планируете остановится" )      
+    span.form__add-field.js-add-field-place + Добавить промежуточный пункт

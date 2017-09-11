@@ -1,0 +1,15 @@
+extends layout
+block content
+    main.main.main-bg
+        .modal.form
+            form(action="/register/confirm" method="POST")
+                .form__header
+                    .form__title На ваш телефон был выслан пароль для подтверждения
+                .form__group
+                    input(type="text" name="username" class="form__input" placeholder="Имя" value=`${session.name}` hidden)
+                .form__group
+                    input(type="phone" name="phone" class="form__input" placeholder="Телефон" value=`${session.phone}` hidden)
+                .form__group
+                    input(type="password" name="password" class="form__input" placeholder="Введите пароль")
+                .form__group
+                    button.button.form__button Подтвредить

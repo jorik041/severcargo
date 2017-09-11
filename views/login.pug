@@ -1,0 +1,18 @@
+extends layout
+block content
+    main.main.main-bg
+        .modal.form
+            form(action="/login" method="POST")
+                .form__header
+                    .form__title Войти
+                .form__group
+                    input(type="phone" name="phone" class="form__input" placeholder="Номер телефона")
+                .form__group.forgot-link-wrapper
+                    input(type="password" name="password" class="form__input" placeholder="Пароль")
+                    span.form__forgot-link
+                        a(href="/forgot") Забыли?
+                .form__group
+                    button.button.form__button Войти
+            .already-register
+                span Еще нет аккаунта?  
+                    a(href="/register") Зарегистрируйтесь

@@ -1,0 +1,9 @@
+extends layout
+include mixins/flight-list
+block content
+    main.main.main-bg
+        .modal.flights
+            if (flights.length)
+                +flights(flights)
+            else 
+                h3.else-text К сожалению нету и одного ближайшего рейса
