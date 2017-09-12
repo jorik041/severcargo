@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
 const md5 = require('md5');
 const validator = require('validator');
-const mongodbErrorHandler = require('mongoose-mongodb-errors');
+const beautifyUnique = require('mongoose-beautiful-unique-validation');
 const passportLocalMongoose = require('passport-local-mongoose');
 const bcrypt = require('bcryptjs');
 const slug = require('limax');
@@ -113,6 +113,6 @@ senderSchema.methods.comparePassword = function(password, cb) {
 }
 
 senderSchema.plugin(passportLocalMongoose, { usernameField: 'phone' });
-senderSchema.plugin(mongodbErrorHandler);
+senderSchema.plugin(beautifyUnique);
 
 module.exports = mongoose.model('Sender', senderSchema);

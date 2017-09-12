@@ -23,7 +23,7 @@
     "md5": "^2.2.1",
     "moment": "^2.18.1",
     "mongoose": "^4.10.8",
-    "mongoose-mongodb-errors": "0.0.2",
+    "mongoose-beautiful-unique-validation": "^7.0.0",
     "multer": "^1.3.0",
     "passport": "^0.3.2",
     "passport-local": "^1.0.0",

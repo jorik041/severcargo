@@ -3,10 +3,10 @@ const Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
 const md5 = require('md5');
 const validator = require('validator');
-const mongodbErrorHandler = require('mongoose-mongodb-errors');
 const passportLocalMongoose = require('passport-local-mongoose');
 const bcrypt = require('bcryptjs');
 const slug = require('limax');
+const beautifyUnique = require('mongoose-beautiful-unique-validation');
 
 const driverSchema = new Schema ({
     account: String,
@@ -133,6 +133,6 @@ driverSchema.pre('save', async function(next) {
 
 
 driverSchema.plugin(passportLocalMongoose, { usernameField: 'phone' });
-driverSchema.plugin(mongodbErrorHandler);
+driverSchema.plugin(beautifyUnique);
 
 module.exports = mongoose.model('Driver', driverSchema);
