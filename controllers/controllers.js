@@ -60,6 +60,11 @@ exports.register = async (req, res, next) => {
         return res.redirect('back');
     }
 
+    if ( !req.body.account )  {
+        req.flash('error', 'Укажите тип пользователя!');
+        return res.redirect('back');
+    }
+
     const password = generatePass();
     req.body.password = password;
     //добавление в БД
