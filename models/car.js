@@ -18,12 +18,17 @@ const carSchema = new Schema ({
         require: true
     },
 
-    photo: [String], 
+    photo: {
+        type: [String],
+        default: 'truck.svg'
+    }, 
 
     car_owner: {
         type: mongoose.Schema.ObjectId,
         ref: 'Driver'
     }
 });
+
+
 
 module.exports = mongoose.model('Car', carSchema);

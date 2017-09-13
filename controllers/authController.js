@@ -226,10 +226,5 @@ exports.updateAccount = async (req, res) => {
             req.flash('success', 'Профиль обнавлен!');
             res.redirect(`/${user.account}/${user.slug}`);
             return;
-        }    
-    // } catch (error) {
-
-    //     console.log(error);        
-    // }
-    
+        }        
 }

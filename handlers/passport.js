@@ -12,7 +12,6 @@ let options = {
 
 passport.use('local-driver', new LocalStrategy( options, 
   function(req, phone, password, done) {
-    req.session.role  = "driver";
     Driver.findOne({ phone: phone }, function (err, user) {
 
       if (err) return done(err);
@@ -34,7 +33,6 @@ passport.use('local-driver', new LocalStrategy( options,
 passport.use(
   'local-sender', new LocalStrategy( options,
     function(req, phone, password, done) {
-      req.session.role = "sender";
 
       Sender.findOne({ phone: phone }, function (err, user) {
 

@@ -7,7 +7,7 @@ block content
                     .account__avatar
                         input(type="file" id="add-photo" name="photo" onchange="PreviewAva();" hidden)
                         label(for="add-photo")
-                            img(src=`/uploads/${user.photo || 'driver-ava.svg'}`, id="ava-preview" alt="Фото водитлея")
+                            img(src=`/uploads/${user.photo || 'driver-ava.svg'}`, class="ava-preview" alt="Фото водитлея")
                             !=  h.icon('foto')
                     .account__info
                         .account__name

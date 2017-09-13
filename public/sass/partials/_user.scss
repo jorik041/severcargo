@@ -34,6 +34,10 @@
       color: var(--text-color);
       font-weight: 400;
       text-decoration: none;
+
+    @include desktop { 
+        font-size: 1em;   
+    }
   }
 
   &__name,
@@ -132,6 +136,10 @@
 
   @include laptop {
     right: calc(20% - 20px);
+  }
+  @include phones {
+
+    right: calc(30% - 10px);
   }
 }
 

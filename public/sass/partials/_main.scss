@@ -86,7 +86,7 @@ html{
 
     @include phones {
         flex-basis:  auto;
-        margin-left: 15%;      
+        margin-left: 80px;      
     }
 
     h1 {
@@ -175,4 +175,12 @@ body {
 .flatpickr-calendar, h1 {
     color: var(--font-color);
     font-family: var(--main-fonts), sans-serif;
+}
+
+.on-mibile {
+    display: none;
+
+    @include tablets {
+        display: block;
+    }
 }

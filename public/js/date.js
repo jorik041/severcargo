@@ -24,7 +24,8 @@ const config = {
     time_24hr  : true,
     locale     : 'ru', 
     altFormat  : 'F j, Y H:i',
-    dateFormat : "F j, Y H:i"
+    dateFormat : "F j, Y H:i",
+    disableMobile: "true"
 }
 
 let addFP = function () {
@@ -67,46 +68,7 @@ addFieldDate.addEventListener('click', function() {
 addFieldPlace.addEventListener('click', function() {
     
     const cloneEL = inputPlace.parentNode.cloneNode(true);
-    console.log();
     this.before(cloneEL);
 }); 
 
-formGroup.addEventListener('click', function (e) {
-    const target = e.target;
-
-    
-    if(target.parentNode === toggleIcon) {
-        console.log('target');   
-    }
-    
-
-}, true);
-
-
-function PreviewImage() {
-    
-    const inputImg = document.getElementById("images");
-    const parentImg = document.querySelector('.preview__list');
-    
-    if (inputImg.files) {
-        const filesAmount = inputImg.files.length;
-        for (var i = 0; i < filesAmount; i++) {
-            
-            const oFReader = new FileReader();
-            const li = document.createElement('li');
-            const img = document.createElement('img');
-            
-            parentImg.appendChild(li);
-            li.innerHTML = "<button class='preview__img-remove' onClick='this.parentElement.remove()'>&times;</button>";
-            li.appendChild(img);
-
-            oFReader.onload = function (oFREvent) {
-                
-                img.src = oFREvent.target.result;
-            };
-
-            oFReader.readAsDataURL(inputImg.files[i]);
-        }
-    }
-};
 

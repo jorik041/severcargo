@@ -27,12 +27,15 @@ const driverSchema = new Schema ({
         trim: true
     },
 
-    photo: String,
+    photo: {
+        type: String,
+        default: 'driver-ava.svg'
+    },
 
     phone: {
         type: String,
         trim: true,
-        unique: 'Такой номер телефона уже существует',
+        unique: 'Пользователь с такми номером телефона уже зарегистрирован',
         validate:{
             validator: value => {
                 validator.isMobilePhone(value, 'ru-RU');
@@ -54,6 +57,11 @@ const driverSchema = new Schema ({
         required: true
     },
 
+    car: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'Car'
+    },
+
     resetPasswordExpires: Date
 }, { 
     toJSON: { virtuals: true },  
@@ -66,11 +74,11 @@ driverSchema.virtual('flights', {
     foreignField: 'author'
 });
 
-driverSchema.virtual('cars', {
-    ref: 'Car', 
-    localField: '_id',
-    foreignField: 'car_owner'
-});
+// driverSchema.virtual('cars', {
+//     ref: 'Car', 
+//     localField: '_id',
+//     foreignField: 'car_owner'
+// });
 
 driverSchema.virtual('reviews', {
     ref: 'Review', 
@@ -105,9 +113,7 @@ driverSchema.pre('save', function(next) {
 driverSchema.methods.comparePassword = function(password, cb) {
     var user = this;
     
-    bcrypt.compare(password, user.password, function(err, res) {
-        console.log(`результат сравнения ${res}`);
-        
+    bcrypt.compare(password, user.password, function(err, res) {        
         if (err) return cb(err);
         cb(null, res);
     });
@@ -131,6 +137,13 @@ driverSchema.pre('save', async function(next) {
     next();
 });
 
+function autopopulate(next) {
+    this.populate('car');
+    next();
+  }
+
+driverSchema.pre('find', autopopulate);
+driverSchema.pre('findOne', autopopulate);
 
 driverSchema.plugin(passportLocalMongoose, { usernameField: 'phone' });
 driverSchema.plugin(beautifyUnique);

@@ -6,7 +6,7 @@ const Driver = mongoose.model('Driver');
 exports.driverPage = async (req, res) => {
     
     
-    const driver = await Driver.find().populate('flights cars');
+    const driver = await Driver.find().populate('flights');
 
     res.render('driver', {
         title: 'Водители', 
@@ -16,7 +16,7 @@ exports.driverPage = async (req, res) => {
 
 exports.getDriverBySLug = async (req, res) => {
      
-    const driver = await Driver.findOne({ slug: req.params.slug }).populate('flights cars reviews');
+    const driver = await Driver.findOne({ slug: req.params.slug }).populate('flights reviews');
 
     res.render('driver', {
         title: 'Личный кабинет', 

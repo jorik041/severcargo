@@ -126,6 +126,18 @@
 
     label {
         font-family: var( --font-light );
+
+        @include phones {
+            justify-content: space-around !important;
+        }
+    }
+
+    @include tablets {
+        @include selected-switch(3, 33%, 2px, var(--main-color));    
+    }
+
+    @include phones {
+        font-size: 16px;
     }
 }
 

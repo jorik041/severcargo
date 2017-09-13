@@ -30,11 +30,6 @@ const FreightFlightSchema = new Schema ({
     author: {
         type: mongoose.Schema.ObjectId,
         ref: 'Driver'
-    },
-
-    car: {
-        type: mongoose.Schema.ObjectId,
-        ref: 'Car'
     }
     
 }, { 
@@ -48,10 +43,10 @@ FreightFlightSchema.virtual('fromto')
     return this.from + ' ' + this.to;
 });
 
-FreightFlightSchema.virtual('cars', {
-    ref: 'Car', 
+FreightFlightSchema.virtual('driver', {
+    ref: 'Driver', 
     localField: 'author',
-    foreignField: 'car_owner'
+    foreignField: '_id'
 });
 
 FreightFlightSchema.pre('save', async function(next) {

@@ -16,7 +16,7 @@ mixin flight-card(flight)
 	.flight-card__body--left
 		.flight-card__dispatch #{ h.moment(flight.date,   "MMMM DD, YYYY H:mm", "ru", true ).format("D MMM HH:mm") }
 		.flight-card__coming Прибытие ~ 
-			span #{ h.moment(flight.date,   "MMMM DD, YYYY H:mm", "ru", true ).add('days', 5).format("Do, dddd, MMMM") }
+			span #{ h.moment(flight.date,   "MMMM DD, YYYY H:mm", "ru", true ).add(5, 'days').format("Do, dddd, MMMM") }
 		.flight-card__views
 			!= h.icon('eye')
 			span 15 просмотров

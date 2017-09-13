@@ -5,6 +5,10 @@
   top: calc( 50% - 10px);
   left: 25px;
   --transition: all ease-in-out 0.4s;
+
+  @include phones {
+    left: 20px;  
+  }
 }
 
 .burger {

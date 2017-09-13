@@ -10,6 +10,14 @@
         font-family: var(--main-fonts);
         font-size: rem(35px);
         font-weight: 400;
+        max-width: 50%;
+        overflow-wrap: break-word;
+
+        &:last-child {
+            @include phones {
+                text-align: right;
+            }
+        }
     }
 
     span {
@@ -30,10 +38,18 @@
     }
     &--right {
         width: 40%;
+
+        @include phones {
+            width: 100%;
+        }
     }
     &--left {
         text-align: right;
         width: 60%;
+
+        @include phones {
+            width: 100%;
+        }
     }
 }
 
@@ -54,6 +70,10 @@
         justify-content: space-between;
         align-items: center;
         margin-bottom: 20px;
+
+        @include phones {
+            flex-direction: column;
+        }
     }//.flight-card__row
 
     &__driver_about {
@@ -65,6 +85,15 @@
             height: 139px;
             margin-right: 25px;
             margin-bottom: 0;
+
+            @include phones {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+        }
+
+        @include phones {
+            flex-direction: column;
         }
     }//.flight-card__driver_about
 
@@ -114,6 +143,10 @@
         margin-bottom: 40px;
         font-family: var(--main-fonts);        
         color: var(--light-color);
+
+        @include phones {
+            font-size: 16px;
+        }
     }
 
     &__dispatch  {
@@ -195,6 +228,10 @@
     font-size: 27px;
     font-weight: 400;
     text-transform: uppercase;
+
+    @include phones {
+       margin-bottom: 15px;
+    }
 }
 
 .flight-card__driver__btn {
@@ -214,6 +251,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @include phones {
+        flex-direction: column;
+    }
 }
 
 .driver__info {
@@ -223,6 +264,10 @@
 
     .star-rating {
         font-size: 12px;
+    }
+
+    @include phones {
+        align-items: center;
     }
 }
 
@@ -238,6 +283,12 @@
         width: 100%;
         height: 100%;
         object-fit: cover;
+    }
+
+    @include phones {
+        width: 100%;
+        height: 200px;
+        margin-right: 0;
     }
 }
 
@@ -269,5 +320,6 @@
     }
 }
 
-
-
+.driver__info-rating {
+    display: flex;
+}

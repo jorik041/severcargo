@@ -6,9 +6,14 @@ const Car = mongoose.model('Car');
 
 exports.getFlightFreight = async(req, res, next) => {
   
-  const flights = await FreightFlight.find().populate('author cars').sort({
-    created_at: -1
-  });
+  const flights = await FreightFlight.find()
+    .populate({
+      path: 'author',
+      populate: { path: 'car' }
+    })
+    .sort({
+      created_at: -1
+    });
 
   res.render('search', {
     title: 'Добавить рейс',
@@ -26,8 +31,7 @@ exports.flightPage = async(req, res) => {
 //добавление рейса в БД
 exports.addFlight = async(req, res) => {
   req.body.author = req.user._id;
-  console.log(req.body);
-  
+
   const flights = new FreightFlight(req.body);
   await flights.save();
 
@@ -37,8 +41,11 @@ exports.addFlight = async(req, res) => {
 exports.flightCardPage = async(req, res) => {
 
   const flight = await FreightFlight.findOne({
-    slug: req.params.slug
-  }).populate('author cars');
+      slug: req.params.slug
+    }).populate({
+      path: 'author',
+      populate: { path: 'car reviews' }
+    });
 
   if (!flight) return next();
 

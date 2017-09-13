@@ -211,7 +211,8 @@ function PreviewImage() {
 
 function PreviewAva() {
   var oFReader = new FileReader();
-
+  console.log('change');
+  
   oFReader.readAsDataURL(document.getElementById("add-photo").files[0]);
 
   oFReader.onload = function (oFREvent) {
@@ -236,7 +237,7 @@ const menuModule = (() => {
     
   }
 
-  function toggleBurger() {
+  function toggleBurger() {    
     this.classList.toggle('open');
     toggleMenuLeft()
   }
@@ -245,8 +246,7 @@ const menuModule = (() => {
     menuLeft.classList.toggle('open');
   }
 
-  function showHeaderMenu(e) {
-    
+  function showHeaderMenu() {
    headerUserMenu.classList.toggle('open');
 
   }

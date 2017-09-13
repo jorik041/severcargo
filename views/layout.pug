@@ -27,6 +27,9 @@ html(lang="ru")
                                     a(href="") О проекте
                                 li
                                     a(href="") FAQ
+                                li
+                                    a(href="/search").on-mibile Найти рейсы
+                                if user.account == "driver"
                 .header__logo
                     h1
                         a(href="/")  
@@ -42,11 +45,8 @@ html(lang="ru")
                         .user__info
                             .user__name #{ user.name }
                             .user__ava-wrapper.js-show-header-menu
-                                .user__ava
-                                    if user.account == "driver"
-                                        img(src=`/uploads/${ user.photo || "driver-ava.svg" }`, alt="Водитель")
-                                    else
-                                        img(src=`/uploads/${ user.photo || "sender-ava.svg" }`, alt="Отправитель", class="ava-preview")
+                                .user__ava    
+                                    img(src=`/uploads/${ user.photo }`, alt=`${user.account == "driver" ? "Водитель": "Отправитель" }`, class="ava-preview")
                                 .user__profile-menu
                                     ul.profile-menu__list
                                         li
@@ -68,5 +68,5 @@ html(lang="ru")
                                     p.flash__text!= message
                                     button.flash__remove(onClick="this.parentElement.remove()") &times;
         block content
-    block scripts
         script(src="../../js/main.js")
+    block scripts

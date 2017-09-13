@@ -5,9 +5,9 @@ mixin flightForm( data = {} )
       .form__group__two-input.js-form__group__two
         input(type="text" name="from" class="form__input form__input--unborder " placeholder="Укажите место отправки" value=data.from)
         input(type="text" name="date" class="form__input form__input--unborder js-input-date" placeholder="Укажите дату отправки" value=data.date)
-        a(class="js-threeline" title="Календарь")
+        a(class="js-threeline form__input-icon form__icon-calendar" title="Календарь")
           !=  h.icon('threeline')
-        a(class="js-cancel" title="Очистить")
+        a(class="js-cancel form__input-icon form__icon-close" title="Очистить")
           !=  h.icon('cancel')
       span.form__add-field.js-add-field-date + Добавить место отправки
     .add-flight__form__title место прибытия

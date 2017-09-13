@@ -27,17 +27,21 @@ const senderSchema = new Schema ({
         trim: true
     },
 
-    photo: String,
+    photo: {
+        type: String,
+        default: 'sender-ava.svg'
+    },
 
     phone: {
         type: String,
         trim: true,
-        unique: true,
+        unique: 'Пользователь с такми номером телефона уже зарегистрирован',
         validate:{
             validator: value => {
                 validator.isMobilePhone(value, 'ru-RU');
             },
-            msg: 'Номер телефона введен неверно' },
+            msg: 'Номер телефона введен неверно' 
+        },
         required: 'Пожалуйста, введте номер телефона'
     },
 
@@ -103,12 +107,8 @@ senderSchema.methods.comparePassword = function(password, cb) {
     var user = this;
     
     bcrypt.compare(password, user.password, function(err, res) {
-        // console.log(`methods.comparePassword ${ password }`);
-        // console.log(`this Password ${ user.password }`);
-        console.log(`результат сравнения ${res}`);
         if (err) return cb(err);
         cb(null, res);
-        
     });
 }
 

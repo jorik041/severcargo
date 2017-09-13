@@ -1,0 +1,18 @@
+mixin ratingRes ( driver )
+  if driver.reviews.length
+    - const ratingArr = [];
+    each r in driver.reviews
+      - ratingArr.push(r.rating)
+    - const totalRat = ratingArr.reduce( (prev, curr) => { return prev + curr })
+    - const totalRatRound = Math.round( totalRat / ratingArr.length)
+    -for( let i = 0; i < totalRatRound; i++)
+      .review__star.review__star--yellow
+        != h.icon('star')  
+    -for( let i = 0; i < (5 - totalRatRound ); i++)
+      .review__star.review__star--green
+        != h.icon('star') 
+  else 
+    each star in [5, 4, 3, 2, 1]
+      .review__star.review__star--green
+        != h.icon('star') 
+  

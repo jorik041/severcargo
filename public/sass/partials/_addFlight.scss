@@ -3,8 +3,6 @@
     padding: 0 10px;
 }
 
-
-
 .add-flight {
 
     &__header {
@@ -12,6 +10,11 @@
         padding-bottom: rem(20px);
         margin-bottom: rem(43px);
         border-bottom: 1px solid #c4c4c4;
+
+        @include phones {
+            padding-right: rem(50px);
+            padding-left: rem(50px);            
+        }
     }
     &__title {
         font-family: var(--main-fonts);
@@ -31,6 +34,21 @@
     .form {
         padding: 0 rem(110px);
         padding-bottom: rem(50px);
+
+        @include laptop {
+            padding-right: rem(50px);
+            padding-left: rem(50px);
+        }
+
+        @include tablets {
+            padding-right: rem(35px);
+            padding-left: rem(35px);
+        }
+
+        @include phones {
+            padding-right: rem(15px);
+            padding-left: rem(15px);
+        }
     }
 }
 
@@ -59,6 +77,11 @@
         font-family: var(--main-fonts);
         font-size: 20px;
         font-weight: 300;
+        text-align: center;
+
+        @include tablets {
+            font-size: 16px;
+        }
     }
 }
 

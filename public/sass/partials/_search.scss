@@ -1,6 +1,6 @@
 .modal.flights {
     padding: rem(40px) rem(40px);
-
+    text-align: center;
     @include laptop {
         padding-left: rem(20px);  
         padding-right: rem(20px);          
@@ -22,6 +22,12 @@
         margin-top: 20px;
         margin-bottom: 0;
         width: var(--width-on-mobile);
+    }
+
+    @include phones {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 20px;
     }
 }
 
@@ -58,6 +64,10 @@
         padding-bottom: 0;
         min-height: inherit;
     }
+
+    @include phones {
+        --width-on-mobile: 100%;
+    }
 }
 
 
@@ -84,7 +94,7 @@
 .flights__type__text, 
 .flights__type__car {
     font-family: var(--main-fonts);
-    font-size: 15px;
+    font-size: rem(15px);
     color: var( --light-color );
 }
 
@@ -148,7 +158,7 @@
 
     span:nth-child(1) {
         margin-bottom: 25px;
-        font-size: 25px;
+        font-size: rem(25px);
         font-weight: 400;
         color: var(--font-color );
 
@@ -171,7 +181,7 @@
 .flights__author {
     display: inline-block;
     color: var(--font-color);
-    font-size: 25px;
+    font-size: rem(25px);
     font-weight: 400;
 
     div {
@@ -302,5 +312,14 @@
 
     @include tablets {
         display: flex;
+    }
+
+    @include phones {
+        display: flex;
+        position: relative;
+        right: 0;
+        width: 100%;
+        margin: auto;
+        height: 60px;
     }
 }

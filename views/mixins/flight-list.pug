@@ -1,6 +1,7 @@
 mixin flights(flights)
     ul.flights__list
         - for (let flight of flights)
+            //pre=h.dump(flight)
             li.flights__item
                 .flights__go-to 
                     a(href=`/search/flight-card/${flight.slug}`) >
@@ -8,7 +9,7 @@ mixin flights(flights)
                     .flights__add-date=`Добавлено ${ h.moment(flight.created_at).locale('ru').fromNow() }`
                     .flights__type
                         span.flights__type__text Тип автомобиля
-                        span.flights__type__car  #{ flight.cars.type }
+                        span.flights__type__car  #{ flight.author.car.type }
                 .flights__date.flights__date__mobile
                     span=`${ h.moment(flight.date, "MMMM D, YYYY H:mm", "ru", true ).format("DD.MM") }`
                     div.flights__author #{flight.author.name}

@@ -1,11 +1,10 @@
 mixin accountCar(car = {})
+    //pre=h.dump(car)
     div(class=`${ Object.keys(car).length == 0 ? 'driver__car--hide' : ''}`).driver__car__item.js-car-info
       .driver__car--left
         .driver__car__img-wrapp
           - if (Object.keys(car).length !== 0 && car.photo.length )
               img( src=`/uploads/${ car.photo[0] }`, alt=`${car.model}` ).car-img
-          - else
-              img( src='/uploads/truck.svg', alt='Загрузите фото вашего авто' ).car-img
       .driver__car--right
         .driver__car__info
           .driver__car__model

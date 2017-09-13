@@ -14,7 +14,8 @@ const { catchErrors } = require('../handlers/errorHandlers');
 
 
 router.get( '/', (req, res) => {
-    res.redirect('/register');
+    if ( req.user ) res.redirect('/search');
+    else res.redirect('/register');
 } );
 //get a curent driver page
 router.get( '/driver/:slug', catchErrors(driverController.getDriverBySLug) );

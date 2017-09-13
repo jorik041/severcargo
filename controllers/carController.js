@@ -1,16 +1,20 @@
 const mongoose = require('mongoose');
 const Car = mongoose.model('Car');
+const Driver = mongoose.model('Driver');
+
 
 exports.addCar = async (req, res, next ) => {
-  console.log('add');
-
   const reqFrom = req.headers.referer.split('/')[3];
   
   req.body.car_owner = req.user._id;
-  
+  //создание автомобиля 
   const car = new Car(req.body);
   await car.save();
   
+  const driver = await Driver.findOne({ _id: req.user._id });
+  driver.car = car;
+  await driver.save();
+
   if ( reqFrom !== 'add-flight' ) res.send( car );
 }
 

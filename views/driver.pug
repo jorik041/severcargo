@@ -4,33 +4,20 @@ include mixins/accountCar
 include mixins/car
 include mixins/reviewsForm
 include mixins/reviewsList
+include mixins/rating-resalt
 block content
 		main.main
+			//-pre= h.dump( driver )
 			.modal.driver
 				.driver__about
 					.driver__photo
-						img(src=`/uploads/${ driver.photo || 'driver-ava.svg' }`, alt="Водитель")
+						img(src=`/uploads/${ driver.photo }`, alt="Водитель")
 					.driver__caption
 						.driver__name 
 							span #{driver.name}
 							span #{driver.surename}
 						.driver__rating
-							if driver.reviews.length
-								- const ratingArr = [];
-								each r in driver.reviews
-									- ratingArr.push(r.rating)
-								- const totalRat = ratingArr.reduce( (prev, curr) => { return prev + curr })
-								- const totalRatRound = Math.round( totalRat / ratingArr.length)
-								-for( let i = 0; i < totalRatRound; i++)
-									.review__star.review__star--yellow
-										!= h.icon('star')  
-								-for( let i = 0; i < (5 - totalRatRound ); i++)
-									.review__star.review__star--green
-										!= h.icon('star') 
-							else 
-								each star in [5, 4, 3, 2, 1]
-									.review__star.review__star--green
-										!= h.icon('star') 
+							+ratingRes( driver )
 							span рейтинг
 						.driver__wherefrom #{ driver.city }
 						if user.account === 'driver'
@@ -52,12 +39,12 @@ block content
 						else 
 							h3.else-text Нет ни одного добавленного рейса
 					.driver__car
-						if !driver.cars.length
+						if !driver.car
 							a(href="/").add-link.js-add-car-btn Добавить авто
 								!=  h.icon('add')
 							
-						+accountCar(driver.cars[0])
-						+car( driver.cars[0] )
+						+accountCar(driver.car)
+						+car( driver.car )
 						a(href="/").add-link.js-add-car-btn.driver__car--hide Добавить авто
 								!=  h.icon('add')
 	

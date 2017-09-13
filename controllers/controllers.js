@@ -19,6 +19,7 @@ exports.validateRegister = (req, res, next) => {
 
     req.sanitizeBody('name');
     req.checkBody('name', 'Вы должны указать имя').notEmpty();
+    req.checkBody('account', 'Укажите тип пользователя!').notEmpty();
     req.checkBody('phone', 'Вы должны указать номер телефона').isMobilePhone('ru-RU');
     //passwords
     //req.checkBody('password', 'Пароль введен неверно!').notEmpty();
@@ -26,7 +27,6 @@ exports.validateRegister = (req, res, next) => {
     //req.checkBody('password-confirm', 'Подтвержденный пароль не совпадает!').notEmpty();
 
     const errors = req.validationErrors();
-    
     if (errors) {
         req.flash('error', errors.map(err => err.msg));
         res.render('register', {
@@ -48,36 +48,30 @@ function generatePass () {
 }
 
 exports.register = async (req, res, next) => { 
-        
-
-
-    if ( !req.body.account )  {
-        req.flash('error', 'Укажите тип пользователя!');
-        return res.redirect('back');
-    }
 
     const password = generatePass();
     req.body.password = password;
-    //добавление в БД
-    if (req.body.account ==='sender') {
+    //добавление в БД    
+    if (req.body.account === 'sender') {
         req.session.role = 'sender';
-
-        Sender.create(req.body).catch(
-            err  => {
-                req.flash('error', err.errors.phone.message);
+    
+        Sender.create(req.body)
+            .then( res => next() )
+            .catch( err => {  
+                req.flash('error', err.errors.phone.message );
                 return res.redirect('back'); 
             });
-        next();
 
     } else if ( req.body.account === 'driver' ) {
         req.session.role = 'driver';
 
-        await Driver.create(req.body).catch(
-            err  => {
-                req.flash('error', err.errors.phone.message);
+        Driver.create(req.body)
+            .then( res => next() )
+            .catch( err => {  
+                req.flash('error', err.errors.phone.message );
                 return res.redirect('back'); 
             });
-        next();
+
     }
 }
 
@@ -96,26 +90,26 @@ exports.sendsPassword = (req, res, next) => {
     const pass = '8bf2bf2ac229632f82ba37826f2e2daf';
     //запрос к smsaero API для отправки сообщения пользователю 
     const requestPromis = promisify(request.post);
-    // requestPromis(`https://gate.smsaero.ru/send/?user=${user}&password=${pass}&to=${to}&text=${encodeURIComponent(msg)}&from=news`)
-    //     .then((response) => {
-    //         console.log( response.body );
+    requestPromis(`https://gate.smsaero.ru/send/?user=${user}&password=${pass}&to=${to}&text=${encodeURIComponent(msg)}&from=news`)
+        .then((response) => {
+            console.log( response.body );
             
-    //         if (response.body.match( ' reject') ) {
-    //             req.flash('error', 'Ошибка! На введенный номер телефона невозможно отправить сообщение');
-    //             res.redirect('back');
-    //         } else {
-    //             req.session.name = req.body.name;
-    //             req.session.phone = req.body.phone;
-    //             req.session.pass = password;
+            if (response.body.match( ' reject') ) {
+                req.flash('error', 'Ошибка! На введенный номер телефона невозможно отправить сообщение');
+                res.redirect('back');
+            } else {
+                req.session.name = req.body.name;
+                req.session.phone = req.body.phone;
+                req.session.pass = password;
     
-    //             next();
-    //         }
-    //     })
-    //     .catch(err => {
-    //         req.flash('error', 'На сервере произошла ошибка попробуйте снова!');
-    //         res.redirect('back');
-    //         console.error(err);
-    //     });
+                next();
+            }
+        })
+        .catch(err => {
+            req.flash('error', 'На сервере произошла ошибка попробуйте снова!');
+            res.redirect('back');
+            console.error(err);
+        });
 }
 
 exports.confirmPage = (req, res) => {
