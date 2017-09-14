@@ -18,7 +18,7 @@ exports.login = (req, res, next) => {
                 
             failureRedirect: '/login',
             failureFlash: { type: 'error', message: 'Не смогли зарегистрироваться или войти!' },
-            successRedirect: '/driver',
+            successRedirect: '/search',
             successFlash: 'Добро пожаловать!'
         })(req, res, next);
 

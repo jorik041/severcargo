@@ -53,7 +53,9 @@ html{
 }
 
 .header {
-    position: relative;
+    position: fixed;
+    z-index: 200;
+    width: 100%;
     height: var(--header-height);
     background-color: var(--header-color);
 
@@ -61,6 +63,7 @@ html{
     justify-content: center;
     align-items: center;
     margin-bottom: 5%;
+    box-shadow: 0 2px 5px rgba(0,0,0,.26);
 }
 
 .burger {
@@ -124,10 +127,11 @@ body {
 
 .main {
     height: 100%;
-    min-height: 110vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: flex-start;
+    margin-top: calc( var( --header-height ) + 5% );
 }
 
 .modal {

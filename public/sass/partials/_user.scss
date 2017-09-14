@@ -5,7 +5,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  font-size: 14px;
   @include desktop {
       margin-right: 2%;
       flex-basis:  40%;      
@@ -29,7 +29,6 @@
   &__add, 
   &__search,
   &__name {
-      font-size: 1.125em;
       font-family: var(--font-light ), sans-serif;
       color: var(--text-color);
       font-weight: 400;
