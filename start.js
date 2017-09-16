@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 
-require('dotenv').config({ path: 'variables.env' });
+require('dotenv').config({ path: ' variables.env ' });
 
 
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises

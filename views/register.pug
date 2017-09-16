@@ -4,7 +4,7 @@ block params
 block content
     main.main.main-bg
         .modal.form
-            form(action="/register" method="POST").form
+            form(action="/register" method="POST").form.js-reg
                 .form__header
                     .form__title Регистрация
                     .form__select-account
@@ -21,3 +21,4 @@ block content
             .already-register
                 span Есть аккаунт? 
                     a(href="/login") Вход
+

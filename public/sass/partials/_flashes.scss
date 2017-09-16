@@ -19,6 +19,8 @@
 .flash-messages {
   width: 420px;
   position: fixed;
+  z-index: 100;
+  top: 95px;  
   right: 25px;
   border-radius: 5px;
   box-shadow: 0 0 9px rgba(77, 144, 254, 0.52);
@@ -28,6 +30,7 @@
   background: #e4f5e7;
   box-shadow: 0 3px 10px rgba(0,0,0,0.15);
   padding: 2rem;
+  margin: .5rem 0;
   position: relative;
   z-index: 1;
   border-radius: 3px;

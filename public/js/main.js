@@ -94,9 +94,7 @@ const editCarModule = (function() {
   }
 
   //ЗАПРОС  НА ДОБАВЛЕНИЕ ДАННЫХ ОБ АВТО
-  function ajaxCar(e) {
-    console.log('submit');
-    
+  function ajaxCar(e) {    
     const inputImg = document.getElementById("images");
 
     const formData = new FormData( addCarForm );
