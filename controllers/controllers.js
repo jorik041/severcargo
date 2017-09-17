@@ -29,12 +29,11 @@ exports.validateRegister = (req, res, next) => {
 
     const errors = req.validationErrors();
     if (errors) {
-        res.set('Content-Type', 'text/plain').json( errors );
-        // req.flash('error', errors.map(err => err.msg));
-        // res.render('register', {
-        //     body: req.body,
-        //     flashes: req.flash()
-        // });
+        req.flash('error', errors.map(err => err.msg));
+        res.render('register', {
+            body: req.body,
+            flashes: req.flash()
+        });
         return; // stop the fn from running
     }
     next(); // there were no errors!

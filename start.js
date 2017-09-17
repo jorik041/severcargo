@@ -2,13 +2,13 @@
 const mongoose = require('mongoose');
 
 
-require('dotenv').config({ path: ' variables.env ' });
+require('dotenv').config({ path: 'variables.env' });
 
 
 mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
-mongoose.connect(process.env.DATABASE, {
+mongoose.connect( process.env.DATABASE , {
   keepAlive: true,
-  reconnectTries: Number.MAX_VALUE,
+  reconnectTries: 30,
   useMongoClient: true
 });
 mongoose.connection.on('error', (err) => {
