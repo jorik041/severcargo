@@ -20,7 +20,7 @@ block content
 						.flight-card__row
 								.flight-card__driver_about
 									a(href=`/driver/${flight.author.slug}`).driver__photo
-										img(src=`/uploads/${ flight.author.photo}`, alt="Водитель")
+										img(src=`/uploads/${ flight.author.photo  }`, alt="Водитель")
 									.driver__info
 										.driver__name #{flight.author.name} 
 										.driver__info-rating
@@ -29,7 +29,7 @@ block content
 						.flight-card__row
 							.flight-card__car_about
 									span.driver__car__pic
-										img(src=`/uploads/${ flight.author.car.photo }`, alt="")
+										img(src=`/uploads/${flight.author.car ? flight.author.car.photo : 'truck.svg'}`, alt="")
 									.driver__car-info
-											.driver__car-model #{flight.author.car.model} 
-											.driver__car-type #{flight.author.car.type}
+											.driver__car-model #{flight.author.car ?  flight.author.car.model : 'Газель' } 
+											.driver__car-type #{flight.author.car ? flight.author.car.type : 'Грузовой' }

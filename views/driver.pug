@@ -7,7 +7,7 @@ include mixins/reviewsList
 include mixins/rating-resalt
 block content
 		main.main
-			//pre= h.dump( driver )
+			//pre= h.dump( driver.car )
 			.modal.driver
 				.driver__about
 					.driver__photo
@@ -42,12 +42,10 @@ block content
 						if !driver.car
 							a(href="/").add-link.js-add-car-btn Добавить авто
 								!=  h.icon('add')
-							
-						+accountCar(driver.car)
-						+car( driver.car )
+						+accountCar(driver.car === null || driver.car === undefined ? {} : driver.car)
+						+car( driver.car === null || driver.car === undefined ? {} : driver.car )
 						a(href="/").add-link.js-add-car-btn.driver__car--hide Добавить авто
 								!=  h.icon('add')
-	
 					.driver__reviews
 						.reviews
 							ul.reviews__list
