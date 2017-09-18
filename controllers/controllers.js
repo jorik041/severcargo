@@ -10,18 +10,19 @@ const freightFlight = mongoose.model('FreightFlight');
 const jimp = require('jimp');
 const uuid = require('uuid');
 const multer = require('multer');
+const emitter = require('../handlers/events');
 
 exports.registerPage = (req, res) => {
     res.render('register', { title: 'Регистрация' });
 }
 
 exports.validateRegister = (req, res, next) => {
-    console.log(req.body);
-    
-    req.sanitizeBody('name');
+    //console.log(req.body);
+    req.sanitizeBody('phone');
     req.checkBody('name', 'Вы должны указать имя').notEmpty();
     req.checkBody('account', 'Укажите тип пользователя!').notEmpty();
-    req.checkBody('phone', 'Вы должны указать номер телефона').isMobilePhone('ru-RU');
+    req.checkBody('phone', 'Введите номер телефона').notEmpty();    
+   // if ( req.body.phone ) req.checkBody('phone', 'Вы ввели неправильный номер телефона').isMobilePhone('ru-RU');
     //passwords
     //req.checkBody('password', 'Пароль введен неверно!').notEmpty();
     //req.checkBody('password-confirm', 'Подтвержденный пароль не может быть пустым!').notEmpty();
@@ -54,16 +55,29 @@ exports.register = async (req, res, next) => {
     req.body.password = password;
     //добавление в БД    
     if (req.body.account === 'sender') {
-        req.session.role = 'sender';
-    
+        let user = await Driver.findOne({ phone: req.body.phone });
+        
+        if ( user ) {
+            req.flash('error', 'Пользователь с таким номером телефона уже зарегистрирован');
+            return res.redirect('back');  
+        }
+        
         Sender.create(req.body)
-            .then( res => next() )
-            .catch( err => {  
-                req.flash('error', err.errors.phone.message );
-                return res.redirect('back'); 
-            });
-
+        .then( res => next() )
+        .catch( err => {  
+            req.flash('error', err.errors.phone.message );
+            return res.redirect('back'); 
+        });
+        
+        req.session.role = 'sender';
     } else if ( req.body.account === 'driver' ) {
+        let user = await Sender.findOne({ phone: req.body.phone });
+        if ( user) {
+            console.log(user);
+            req.flash('error', 'Пользователь с таким номером телефона уже зарегистрирован');
+            return res.redirect('back');  
+        }
+
         req.session.role = 'driver';
 
         Driver.create(req.body)
@@ -74,6 +88,7 @@ exports.register = async (req, res, next) => {
             });
 
     }
+    emitter.emit( 'registered', req.body );
 }
 
 exports.sendsPassword = (req, res, next) => {
@@ -158,3 +173,20 @@ exports.resize = async (req, res, next) => {
     await photo.write(`./public/uploads/${req.body.photo}`);
     next();
 }
+
+exports.validateAccount = ( req, res, next ) => {
+    
+    req.checkBody('name', 'Пожалуйста, введите име').notEmpty();
+    req.checkBody('phone', 'Пожалуйста, введите номер вашего телефона').notEmpty(); 
+  
+    const errors = req.validationErrors();
+    if (errors) {
+        req.flash('error', errors.map(err => err.msg));
+        res.render('driverAccount', {
+            body: req.body,
+            flashes: req.flash()
+        });
+        return; // stop the fn from running
+    }
+    next(); // there were no errors!
+  }

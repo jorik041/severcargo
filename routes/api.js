@@ -20,7 +20,10 @@ router.get( '/', (req, res) => {
 //get a curent driver page
 router.get( '/driver/:slug', catchErrors(driverController.getDriverBySLug) );
 //get a  driver page
-router.get( '/driver', authController.isLoggedIn,  catchErrors(driverController.driverPage) );
+router.get( '/driver', 
+    authController.isLoggedIn,  
+    catchErrors(driverController.driverPage) 
+);
 //get a signup page
 router.get( '/register', controllers.registerPage );
 //add new account
@@ -43,12 +46,16 @@ router.get('/login', authController.loginPage);
 router.post('/login', catchErrors(authController.signin));
 router.get('/logout', authController.logout);
 //роутер на страницу профиля
-router.get('/account/driver', authController.isLoggedIn, catchErrors(driverController.account));
+router.get('/account/driver', 
+    authController.isLoggedIn, 
+    catchErrors(driverController.account)
+);
 //обновления профиля
 router.post('/account/driver', 
     controllers.upload, 
     catchErrors(controllers.resize), 
-    catchErrors(driverController.updateAccount)
+    controllers.validateAccount,
+    catchErrors(authController.updateAccount)
 );
 
 router.get('/forgot', authController.forgotPage );
@@ -59,14 +66,16 @@ router.post('/account/forgot',
     ((req, res) => res.redirect('/reset'))
 );
 router.get('/reset', authController.resetPage);
-router.post('/reset', 
-    controllers.confirmPass, 
+router.post('/reset',  
     catchErrors(authController.update) 
 );
 
 //рейсы
-router.get('/add-flight', catchErrors(freightFlightController.flightPage));
-router.post('/add-flight', catchErrors(freightFlightController.addFlight));
+router.get( '/add-flight',  catchErrors(freightFlightController.flightPage) );
+router.post('/add-flight',  
+    freightFlightController.validateFlight, 
+    catchErrors(freightFlightController.addFlight)
+);
 //редактирование рейса
 router.get('/flight/edit/:slug', catchErrors(freightFlightController.editFlight) );
 router.post('/add-flight/:slug', catchErrors(freightFlightController.updateFlight) );
@@ -106,11 +115,15 @@ router.post('/reviews/:id',
 router.get( '/sender/:slug', catchErrors(senderController.getSenderBySlug) );
 
 //изменение дааных отправителя
-router.get('/account/sender', authController.isLoggedIn, catchErrors(senderController.account));
+router.get('/account/sender', 
+    authController.isLoggedIn, 
+    catchErrors(senderController.account)
+);
 //обновить данные об отправителе
 router.post('/account/sender', 
     controllers.upload, 
     catchErrors(controllers.resize), 
+    controllers.validateAccount,
     catchErrors(authController.updateAccount)
 );
 

@@ -47,6 +47,11 @@ const driverSchema = new Schema ({
 
     slug: String, 
 
+    quantity_flights: {
+        type: Number,
+        default: 0
+    },
+
     salt: {
         type: String,
         required: true

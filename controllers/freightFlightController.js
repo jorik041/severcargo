@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const promisify = require("es6-promisify");
 const FreightFlight = mongoose.model('FreightFlight');
 const Car = mongoose.model('Car');
-
+const Driver = mongoose.model('Driver');
 
 exports.getFlightFreight = async(req, res, next) => {
   
@@ -28,12 +28,37 @@ exports.flightPage = async(req, res) => {
     car
   });
 }
+
+//валидация добавляемого рейса
+exports.validateFlight = ( req, res, next ) => {
+  req.checkBody('from', 'Пожалуйста, введите место отправки').notEmpty();
+  req.checkBody('to', 'Пожалуйста, введите место прибытия').notEmpty();
+  req.checkBody('date', 'Пожалуйста, введите время и дату отправки').notEmpty(); 
+
+  const errors = req.validationErrors();
+  if (errors) {
+      req.flash('error', errors.map(err => err.msg));
+      res.render('addFlight', {
+          body: req.body,
+          flashes: req.flash()
+      });
+      return; // stop the fn from running
+  }
+  next(); // there were no errors!
+}
+
 //добавление рейса в БД
 exports.addFlight = async(req, res) => {
   req.body.author = req.user._id;
 
   const flights = new FreightFlight(req.body);
   await flights.save();
+
+  const driver = await Driver.findByIdAndUpdate( 
+    { _id: req.user._id },
+    { $inc: { quantity_flights: 1 } },
+    { context: 'query', new: true }
+  );
 
   res.redirect('/search');
 }

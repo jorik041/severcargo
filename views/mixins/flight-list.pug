@@ -9,14 +9,14 @@ mixin flights(flights)
                     .flights__add-date=`Добавлено ${ h.moment(flight.created_at).locale('ru').fromNow() }`
                     .flights__type
                         span.flights__type__text Тип автомобиля
-                        span.flights__type__car  #{ flight.author.car.type }
+                        span.flights__type__car=`${ flight.author.car.type || 'Грузовой'}`
                 .flights__date.flights__date__mobile
                     span=`${ h.moment(flight.date, "MMMM D, YYYY H:mm", "ru", true ).format("DD.MM") }`
                     div.flights__author #{flight.author.name}
                         div водитель
                 span.flights__body
                     span.flights__item__left
-                        .flights__number S001
+                        .flights__number=`Рейс ${flight.flight_number}`
                         .flights__date 
                             span=`${ h.moment(flight.date, "MMMM D, YYYY H:mm", "ru", true ).format("DD.MM") }`
                             span Отбытие

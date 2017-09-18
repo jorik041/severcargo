@@ -160,17 +160,15 @@ exports.update = async (req, res) => {
 }
 
 exports.updateAccount = async (req, res) => {
-
+    
     const updates = {
         name:  req.body.name,
         surename: req.body.surname,
         phone: req.body.phone,
-        city:  req.body.city,
-        photo:  req.body.photo || 'sender-ava.svg'
+        city:  req.body.city  
     };
 
-    console.log(req.body.photo);
-    
+    if( req.body.photo ) updates.photo = req.body.photo;
     
     const [ driver, sender ] = await Promise.all([ 
         Driver.findById({ _id : req.user._id  }),

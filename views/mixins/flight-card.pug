@@ -20,7 +20,7 @@ mixin flight-card(flight)
 		.flight-card__views
 			!= h.icon('eye')
 			span 15 просмотров
-		.flight-card__num Рейс S0015
+		.flight-card__num= `Рейс ${flight.flight_number}`
 		if user.account === 'driver'
 			.driver__flights_links
 				a(href=`/flight/edit/${flight.slug}`).flight__links__edit Редактировать

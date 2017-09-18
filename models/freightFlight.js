@@ -30,6 +30,11 @@ const FreightFlightSchema = new Schema ({
     author: {
         type: mongoose.Schema.ObjectId,
         ref: 'Driver'
+    },
+
+    flight_number: {
+        type: String,
+        default: 'S0001'
     }
     
 }, { 
@@ -63,6 +68,29 @@ FreightFlightSchema.pre('save', async function(next) {
     if(flightsWidthSlug.length){
         this.slug = `${this.slug}-${flightsWidthSlug.length + 1}`;
     }
+
+    next();
+});
+
+FreightFlightSchema.pre('save', async function(next) {
+    if(!this.isModified('flight_number') ) {
+        next();
+        return;
+    }
+
+    let test = 'S-001',
+        pieces = test.split('-'),
+        prefix = pieces[0],
+        lastNum = pieces[1];
+    
+    lastNum = parseInt(lastNum, 10);
+    // lastNum = +lastNum is also a valid option.
+    function incrementFlightNum () {
+        let num = lastNum++;
+    
+        return num = `S${("000" + num).substr(-4)}`;
+    }
+    this.flight_number = incrementFlightNum();
 
     next();
 });
