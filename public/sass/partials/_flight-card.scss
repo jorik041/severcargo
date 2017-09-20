@@ -6,6 +6,7 @@
     margin-bottom: 40px;
 
     &__point{
+        flex-grow: 1;
         color: #333;
         font-family: var(--main-fonts);
         font-size: rem(35px);
@@ -14,6 +15,7 @@
         overflow-wrap: break-word;
 
         &:last-child {
+            text-align: right;
             @include phones {
                 text-align: right;
             }
@@ -21,6 +23,7 @@
     }
 
     span {
+        flex-grow: 1;
         height: 3em;
     }
 }
@@ -220,7 +223,12 @@
 
 .flight-card__from-to {
     display: flex;
-    flex-direction: column;    
+    flex-direction: column;
+    margin-bottom: 50px;
+    
+    @include tablets {
+        margin-bottom: 0;
+    }
 }
 
 .flight-card__driver__phone {

@@ -11,14 +11,14 @@ mixin flights(flights)
                         span.flights__type__text Тип автомобиля
                         span.flights__type__car=`${flight.author.car ? flight.author.car.type : 'Грузовой'}`
                 .flights__date.flights__date__mobile
-                    span=`${ h.moment(flight.date, "MMMM D, YYYY H:mm", "ru", true ).format("DD.MM") }`
+                    span=`${ h.moment(flight.departureDate, "MMMM D, YYYY H:mm", "ru", true ).format("DD.MM") }`
                     div.flights__author #{flight.author.name}
                         div водитель
                 span.flights__body
                     span.flights__item__left
                         .flights__number=`Рейс ${flight.flight_number}`
                         .flights__date 
-                            span=`${ h.moment(flight.date, "MMMM D, YYYY H:mm", "ru", true ).format("DD.MM") }`
+                            span=`${ h.moment(flight.departureDate, "MMMM D, YYYY H:mm", "ru", true ).format("DD.MM") }`
                             span Отбытие
                     span.flights__item__center
                         .flights__from-to

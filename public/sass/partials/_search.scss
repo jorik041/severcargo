@@ -140,10 +140,10 @@
 
 .flights__number {
     font-family: var(--font-light );
-    font-size: 25px;
+    font-size: 20px;
     line-height: 30px;
     text-transform: uppercase;
-    margin-right: 15.78%;
+    margin-right: 10.78%;
     color: var(--light-color);
 
     @include laptop {
@@ -227,6 +227,7 @@
     font-weight: 400;
     word-break: break-word;
     white-space: pre-line;
+    hyphens: auto;
 
     @include tablets {
     
@@ -250,7 +251,8 @@
 .flights__info {
     padding-left: var(--padding);
     font-family: var(--main-fonts );
-
+    text-align: left;
+    
     span:nth-child(1){
         color: var(--light-color);
         font-size: 15px;

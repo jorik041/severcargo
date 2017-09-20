@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
 const slug = require('limax');
+const Number = require('./flightNumber');
 
 
 const FreightFlightSchema = new Schema ({
@@ -17,10 +18,16 @@ const FreightFlightSchema = new Schema ({
         required: 'Пожалуйста, введите место прибытия'
     },
 
-    date: {
+    departureDate: {
         type: String, 
         trim: true, 
         required: 'Пожалуйста, введите время и дату отправки'
+    }, 
+
+    arrivalDate: {
+        type: String, 
+        trim: true, 
+        required: 'Пожалуйста, введите примерную время и дату прибития'
     }, 
 
     slug: String, 
@@ -31,10 +38,9 @@ const FreightFlightSchema = new Schema ({
         type: mongoose.Schema.ObjectId,
         ref: 'Driver'
     },
-
     flight_number: {
-        type: String,
-        default: 'S0001'
+        type: String, 
+        default: 'SOO1'
     }
     
 }, { 
@@ -73,27 +79,42 @@ FreightFlightSchema.pre('save', async function(next) {
 });
 
 FreightFlightSchema.pre('save', async function(next) {
-    if(!this.isModified('flight_number') ) {
+   
+    if( !this.isNew ) {
         next();
         return;
     }
-
-    let test = 'S-001',
-        pieces = test.split('-'),
-        prefix = pieces[0],
-        lastNum = pieces[1];
-    
-    lastNum = parseInt(lastNum, 10);
-    // lastNum = +lastNum is also a valid option.
-    function incrementFlightNum () {
-        let num = lastNum++;
-    
-        return num = `S${("000" + num).substr(-4)}`;
+    let flightDirection;
+    // если  рейс едет в Уренгой или Сургут, то
+    if ( this.to === "Новый Уренгой" || this.to === "Сургут") {
+        flightDirection = 'N';
+    } else {
+        flightDirection = 'S';
     }
-    this.flight_number = incrementFlightNum();
+    
+    const doc = this;
 
-    next();
+    await Number.findByIdAndUpdate(
+        { "_id": "flight_number" }, 
+        { "$inc": { "number": 1 } }, 
+        
+        function(error, counter)   {
+        if(error){
+             return next(error);
+        } else if (!counter ) {//если модели нету, то создать новую 
+    
+            counter =  new Number({ _id: "flight_number" }, { $inc: { number: 1 } });
+            counter.save(() => {
+                let num = ("000" + counter.number).substr(-4);
+                doc.flight_number = `${ flightDirection }${ num }`;
+                next();
+            });
+          } else {
+            let num = ("000" + counter.number).substr(-4);            
+            doc.flight_number = `${ flightDirection }${ num }`;
+            next();
+        }
+    });
 });
-
 
 module.exports = mongoose.model('FreightFlight', FreightFlightSchema);

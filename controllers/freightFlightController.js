@@ -31,18 +31,18 @@ exports.flightPage = async(req, res) => {
 
 //валидация добавляемого рейса
 exports.validateFlight = ( req, res, next ) => {
+
   req.checkBody('from', 'Пожалуйста, введите место отправки').notEmpty();
   req.checkBody('to', 'Пожалуйста, введите место прибытия').notEmpty();
-  req.checkBody('date', 'Пожалуйста, введите время и дату отправки').notEmpty(); 
+  req.checkBody('departureDate', 'Пожалуйста, введите время и дату отправки').notEmpty(); 
+  req.checkBody('arrivalDate', 'Пожалуйста, введите примерную дату и время прибития').notEmpty(); 
+  
 
   const errors = req.validationErrors();
   if (errors) {
       req.flash('error', errors.map(err => err.msg));
-      res.render('addFlight', {
-          body: req.body,
-          flashes: req.flash()
-      });
-      return; // stop the fn from running
+      return res.redirect('back');
+       // stop the fn from running
   }
   next(); // there were no errors!
 }
@@ -50,7 +50,7 @@ exports.validateFlight = ( req, res, next ) => {
 //добавление рейса в БД
 exports.addFlight = async(req, res) => {
   req.body.author = req.user._id;
-
+  
   const flights = new FreightFlight(req.body);
   await flights.save();
 

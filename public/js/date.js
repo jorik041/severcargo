@@ -14,7 +14,7 @@ flatpickr.l10ns.ru.months = {
 	longhand: ["Январь", "Февраль", "Март", "Апрель", "Май", "Июнь", "Июль", "Август", "Сентябрь", "Октябрь", "Ноябрь", "Декабрь"]
 };
 if (typeof module !== "undefined") module.exports = flatpickr.l10ns;
-
+//flatpickr(sel, config);
 const sel = document.querySelectorAll('.js-input-date');
 
 const config = {
@@ -26,10 +26,6 @@ const config = {
     altFormat  : 'F j, Y H:i',
     dateFormat : "F j, Y H:i",
     disableMobile: "true"
-}
-
-let addFP = function () {
-    return flatpickr(params, config);
 }
 
 flatpickr(sel, config);
@@ -57,18 +53,17 @@ cancelIcon.addEventListener('click', function () {
 });
 
 
-addFieldDate.addEventListener('click', function() {
+// addFieldDate.addEventListener('click', function() {
     
-	const cloneEL = formGroupTwo.cloneNode(true);
-    this.before(cloneEL);
+// 	const cloneEL = formGroupTwo.cloneNode(true);
+//     this.before(cloneEL);
     
-    flatpickr('.js-input-date', config);
-});
+//     flatpickr('.js-input-date', config);
+// });
 
 addFieldPlace.addEventListener('click', function() {
     
     const cloneEL = inputPlace.parentNode.cloneNode(true);
     this.before(cloneEL);
 }); 
-
 

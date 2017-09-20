@@ -5,7 +5,7 @@ const htmlToText = require('html-to-text');
 const promisify = require('es6-promisify');
 
 const transport = nodemailer.createTransport( {
-  рщые: process.env.MAIL_HOST,
+  host: process.env.MAIL_HOST,
   port: process.env.MAIL_PORT,
   auth: {
     user: process.env.MAIL_USER,
