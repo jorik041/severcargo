@@ -32,4 +32,3 @@ const server = app.listen(app.get('port'), () => {
     console.log(`Server runing PORT ${server.address().port}`);
 });
 
-//require('./handlers/mail');

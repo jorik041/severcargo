@@ -7,7 +7,7 @@ const flightNumSchema = new Schema ({
   
   number: {
     type: Number, 
-    default: 0
+    default: 1
   },
   
   author: {

@@ -4,7 +4,13 @@ mixin car(car = {})
 		.form__group
 			input(type="text" name="model" class="form__input" placeholder="Марка, модель" value=car.model)
 		.form__group
-			input(type="text" name="type" class="form__input" placeholder="Тип" value=car.type)
+			select(class="form__input form__select" name="type" )
+				- const opt = ['Тент', 'Будка', 'Холодильник', 'Пассажирский', 'Грузопассажирский', 'Прочее']
+				- const type = car.type || []
+				option( hidden disabled selected value) Тип автомобиля
+				each option in opt 
+					option( value=option selected=(type.includes(option)) )= option
+			//input(type="text" name="type"  placeholder="Тип" value=car.type)
 		.form__group
 			input(type="text" name="number" class="form__input" placeholder="Гос. номер" value=car.number)
 		.form__group

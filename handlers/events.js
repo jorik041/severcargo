@@ -1,6 +1,15 @@
 const EventEmitter = require('events');
 const emitter = new EventEmitter();
 
-emitter.on('registered', msg => console.log(msg) );
+const mail = require('./mail');
+
+emitter.on('registered', async (msg) => {
+  await mail.send( msg );
+});
+
+emitter.on('added-flight', async (msg) => {
+  await mail.sendFlight( msg );
+});
+
 
 module.exports = emitter;

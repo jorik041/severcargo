@@ -1,0 +1,35 @@
+mixin social()
+  - 
+    const social = [
+      {
+        link: 'http://vk.com/',
+        icon: 'vk'
+      }, 
+      {
+        link: 'http://telegram.com/',
+        icon: 'telegram'
+      }, 
+      {
+        link: 'http://whatsapp.com/',
+        icon: 'whatsapp'
+      }, 
+      {
+        link: 'http://instagram.com/',
+        icon: 'instagram'
+      }, 
+      {
+        link: 'http://facebook.com/',
+        icon: 'facebook'
+      }, 
+      {
+        link: 'http://twitter.com/',
+        icon: 'twitter'
+      }
+    ]
+
+  .social
+    ul.social__list
+      each item in social
+        li.social__item
+          a(href=`${item.link}`).social__link
+            != h.icon(`${item.icon}`)

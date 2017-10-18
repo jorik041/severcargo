@@ -20,7 +20,8 @@ exports.addCar = async (req, res, next ) => {
 
 exports.updateCar = async ( req, res ) => {
 
-  console.log("update");
+  console.log(req.body);
+  
   
   const car = await Car.findByIdAndUpdate(
     { _id: req.params.id},

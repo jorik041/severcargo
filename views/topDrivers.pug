@@ -1,0 +1,28 @@
+extends layout
+include mixins/socials
+block content
+  main.main
+    .modal
+      .top
+        .top__title Рейтинг водителей
+        table.table.top__table.table--bordered
+          thead.table__thead
+            tr.table__tr
+              th.table__th №
+              th.table__th Имя
+              th.table__th Машина
+              th.table__th Кол-во рейсов
+              th.table__th.mob-hidden Кол-во отзывов      
+          tbody.table__tbody
+            each item, i in drivers
+              tr.table__tr
+                th.table__th #{i+1}
+                th.table__th
+                  a(href=`/driver/${item.slug}`).table__link
+                    .table__ava
+                      img(src=`/uploads/${item.photo || 'sender-ava.svg'}` alt=item.name)
+                    span= item.name
+                th.table__th= item.car[0].model
+                th.table__th= item.quantity_flights
+                th.table__th.mob-hidden= item.reviews.length
+

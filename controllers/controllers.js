@@ -73,7 +73,6 @@ exports.register = async (req, res, next) => {
     } else if ( req.body.account === 'driver' ) {
         let user = await Sender.findOne({ phone: req.body.phone });
         if ( user) {
-            console.log(user);
             req.flash('error', 'Пользователь с таким номером телефона уже зарегистрирован');
             return res.redirect('back');  
         }
@@ -88,7 +87,6 @@ exports.register = async (req, res, next) => {
             });
 
     }
-    emitter.emit( 'registered', req.body );
 }
 
 exports.sendsPassword = (req, res, next) => {
@@ -108,7 +106,7 @@ exports.sendsPassword = (req, res, next) => {
     const requestPromis = promisify(request.post);
     requestPromis(`https://gate.smsaero.ru/send/?user=${user}&password=${pass}&to=${to}&text=${encodeURIComponent(msg)}&from=news`)
         .then((response) => {
-            console.log( response.body );
+            //console.log( response.body );
             
             if (response.body.match( ' reject') ) {
                 req.flash('error', 'Ошибка! На введенный номер телефона невозможно отправить сообщение');
@@ -117,7 +115,7 @@ exports.sendsPassword = (req, res, next) => {
                 req.session.name = req.body.name;
                 req.session.phone = req.body.phone;
                 req.session.pass = password;
-    
+                
                 next();
             }
         })
@@ -135,6 +133,16 @@ exports.confirmPage = (req, res) => {
 exports.confirmPass = (req, res, next) => {
     req.checkBody('password', 'Введите пароль!').notEmpty();
     if (req.session.pass === req.body.password) {
+        //объект в который будут складываться поля вновь зрагеистрировавщшегося поль-ля и отправляться на почту
+        const whoRegistered = {};
+
+        whoRegistered.account = req.session.role;
+        whoRegistered.name = req.session.name;
+        whoRegistered.phone = req.session.phone;
+        whoRegistered.subject = 'Зарегистрировался пользователь';
+        //сбросить пароль сохраненный в сессии
+        req.session.pass = null;
+        emitter.emit( 'registered', whoRegistered );
         next();
     } else {
         req.flash('error', 'Ошибка! Пароль введен неверно, попробуйте снова!');
@@ -175,10 +183,10 @@ exports.resize = async (req, res, next) => {
 }
 
 exports.validateAccount = ( req, res, next ) => {
-    
+
     req.checkBody('name', 'Пожалуйста, введите име').notEmpty();
     req.checkBody('phone', 'Пожалуйста, введите номер вашего телефона').notEmpty(); 
-  
+
     const errors = req.validationErrors();
     if (errors) {
         req.flash('error', errors.map(err => err.msg));
@@ -189,4 +197,14 @@ exports.validateAccount = ( req, res, next ) => {
         return; // stop the fn from running
     }
     next(); // there were no errors!
-  }
+}
+
+exports.contacts = (req, res) => {
+    res.render('contacts', { title: 'Контакты' });
+}
+
+exports.getTopDrivers = async (req, res) => {
+    const drivers = await Driver.getTopDrivers();
+    //res.json(drivers);
+    res.render('topDrivers', { drivers, title: 'Топ' });
+}

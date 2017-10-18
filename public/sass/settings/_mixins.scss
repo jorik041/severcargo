@@ -82,3 +82,22 @@
 	}
 }
 
+@mixin headerModal() {
+	padding: 0 rem(110px);
+	padding-bottom: rem(20px);
+	margin-bottom: rem(43px);
+	border-bottom: 1px solid #c4c4c4;
+
+	@include phones {
+		padding-right: rem(50px);
+		padding-left: rem(50px);            
+	}
+} 
+
+@mixin titleModal() {
+	font-family: var(--main-fonts);
+	font-size: rem(35px);
+	font-weight: 400;
+	margin-bottom: rem(25px);
+}
+

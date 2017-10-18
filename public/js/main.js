@@ -223,30 +223,34 @@ function PreviewAva() {
 const menuModule = (() => {
   const init = () => { setupListeners() }
 
+  const header = document.querySelector('.header');
   const headerUserMenuBtn = document.querySelector('.js-show-header-menu');
   const headerUserMenu = document.querySelector('.user__profile-menu');
   const burgerBtn = document.querySelector('.js-burger');
-  const menuLeft = document.querySelector('.js-nav');
-  
+  const overlayNav = document.querySelector('.nav-overlay ');
+  const body = document.querySelector('body');
   
   const setupListeners = () => {
     if ( headerUserMenuBtn != null ) headerUserMenuBtn.addEventListener( 'click', showHeaderMenu );
-    burgerBtn.addEventListener('click', toggleBurger );
+    burgerBtn.addEventListener('click', triggerMenu );
+    overlayNav.addEventListener('click', closeMenu);
+  }
+
+  function triggerMenu() {    
+    header.classList.toggle('open');
+    body.classList.toggle('menu-open');
+  }
+
+  function showHeaderMenu() {    
+    headerUserMenu.classList.toggle('open');
+  }
+
+  function closeMenu() {
+    console.log('click');
     
-  }
-
-  function toggleBurger() {    
-    this.classList.toggle('open');
-    toggleMenuLeft()
-  }
-
-  function toggleMenuLeft() {
-    menuLeft.classList.toggle('open');
-  }
-
-  function showHeaderMenu() {
-   headerUserMenu.classList.toggle('open');
-
+    if ( header.classList.contains('open') ) {
+      triggerMenu();
+    }
   }
 
   return {

@@ -5,6 +5,8 @@ html(lang="ru")
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
         meta(http-equiv="X-UA-Compatible", content="ie=edge")
+        link(rel="shortcut icon" href="images/favicon.ico" type="image/x-icon")
+        link(rel="icon" href="images/favicon.ico" type="image/x-icon")
         link(rel="stylesheet", href="/dist/css/style.css")
     block params
     body( class =`${ bg ? 'bg':'' }`)
@@ -16,8 +18,7 @@ html(lang="ru")
                             span &nbsp;
                             span &nbsp;
                             span &nbsp;
-                        .nav-overlay
-                        nav.nav.js-nav
+                        nav.nav
                             ul.nav__list
                                 li
                                     a(href=`/${ user.account }/${ user.slug}`) Личный кабинет
@@ -29,7 +30,7 @@ html(lang="ru")
                                     a(href="") FAQ
                                 li
                                     a(href="/search").on-mibile Найти рейсы
-                                if user.account == "driver"
+                    .nav-overlay        
                 .header__logo
                     h1
                         a(href="/")  

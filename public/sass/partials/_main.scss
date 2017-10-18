@@ -8,7 +8,7 @@
     --font-logo   : 'GEO';    
     --font-color  : #333;
     --text-color  : #ffffff;
-    --header-height: 85px;
+    --header-height: 85px;   
 }
 
 @font-face {
@@ -73,7 +73,8 @@ html{
 }
 
 .header__logo {
-    flex-basis: 61%;
+    margin-left: auto;
+    flex-basis: 55%;
 
     @include desktop {
         flex-basis: 50%;
@@ -188,4 +189,8 @@ body {
     @include tablets {
         display: block;
     }
+}
+
+select{
+    appearance: none; 
 }

@@ -26,7 +26,6 @@ exports.getDriverBySLug = async (req, res) => {
 
 
 exports.account = async (req, res) => {
-
     const driver = await Driver.find();
 
     res.render('driverAccount', {

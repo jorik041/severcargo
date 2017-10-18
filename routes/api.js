@@ -127,5 +127,7 @@ router.post('/account/sender',
     catchErrors(authController.updateAccount)
 );
 
+router.get('/contacts', controllers.contacts);
+router.get('/top', catchErrors(controllers.getTopDrivers));
 
 module.exports = router;

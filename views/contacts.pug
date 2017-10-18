@@ -1,0 +1,19 @@
+extends layout
+include mixins/socials
+block content
+  main.main
+    .modal
+      .contacts
+        .contacts__header
+          .contacts__title Контакты
+          .contacts__subtitle
+            p Мы всегда готовы помочь.
+            p Спасибо за ваши отзывы — они помогут улучшить СЕВЕРКАРГО!
+        .contacts__body
+          p У вас жалоба или предложение?
+          p А так же по вопросам сотрудничества, пишите нам:
+          .contacts__social
+            +social()
+
+
+          

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 mongoose.Promise = global.Promise;
 const slug = require('limax');
-const Number = require('./flightNumber');
+const flightNumber = require('./flightNumber');
 
 
 const FreightFlightSchema = new Schema ({
@@ -94,7 +94,7 @@ FreightFlightSchema.pre('save', async function(next) {
     
     const doc = this;
 
-    await Number.findByIdAndUpdate(
+    await flightNumber.findByIdAndUpdate(
         { "_id": "flight_number" }, 
         { "$inc": { "number": 1 } }, 
         
@@ -103,7 +103,7 @@ FreightFlightSchema.pre('save', async function(next) {
              return next(error);
         } else if (!counter ) {//если модели нету, то создать новую 
     
-            counter =  new Number({ _id: "flight_number" }, { $inc: { number: 1 } });
+            counter =  new flightNumber({ _id: "flight_number" }, { $inc: { number: 1 } });
             counter.save(() => {
                 let num = ("000" + counter.number).substr(-4);
                 doc.flight_number = `${ flightDirection }${ num }`;

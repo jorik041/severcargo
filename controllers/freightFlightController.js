@@ -3,6 +3,7 @@ const promisify = require("es6-promisify");
 const FreightFlight = mongoose.model('FreightFlight');
 const Car = mongoose.model('Car');
 const Driver = mongoose.model('Driver');
+const emitter = require('../handlers/events');
 
 exports.getFlightFreight = async(req, res, next) => {
   
@@ -50,7 +51,7 @@ exports.validateFlight = ( req, res, next ) => {
 //добавление рейса в БД
 exports.addFlight = async(req, res) => {
   req.body.author = req.user._id;
-  
+    
   const flights = new FreightFlight(req.body);
   await flights.save();
 
@@ -58,8 +59,9 @@ exports.addFlight = async(req, res) => {
     { _id: req.user._id },
     { $inc: { quantity_flights: 1 } },
     { context: 'query', new: true }
-  );
+  ); 
 
+  emitter.emit( 'added-flight', flights );
   res.redirect('/search');
 }
 

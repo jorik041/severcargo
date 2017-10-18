@@ -11,6 +11,7 @@ mixin accountCar(car = {})
             span=`${car.model}, `
             span=`${car.type}`
           .driver__car__number=`${ car.number }`
-          .driver__car__change
-            a(href="/").driver__car__edit.button.driver__btn.js-edit Редактировать
-            a(href=`/delete-car/${car._id }`).driver__car__remove.js-del-car Удалить
+          if user.account === 'driver'
+            .driver__car__change
+              a(href="/").driver__car__edit.button.driver__btn.js-edit Редактировать
+              a(href=`/delete-car/${car._id }`).driver__car__remove.js-del-car Удалить

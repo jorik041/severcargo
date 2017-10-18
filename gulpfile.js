@@ -48,21 +48,22 @@ gulp.task('sass', () =>  {
 //     .pipe(gulp.dest('./public'))
 // });
 
-gulp.task('watch', ['browser-sync', 'sass'], () => {
-  gulp.watch('./public/sass/**/*.scss', ['sass']);
-  //gulp.watch('./views/**/*.pug', ['pug']);
-  gulp.watch(['./*.html',
-              'public/js/*.js',
-              'public/dist/css/**/*.css']).on('change', browserSync.reload);
-});
-
-gulp.task('browser-sync', ['sass',  'nodemon'], () => {
+gulp.task('browser-sync', () => {
     browserSync.init(null, {
 		proxy: "http://localhost:4000",
-        files: ["public/**/*.*"],
+        files: ["./**/*.*"],
         port: 7000,
-	});
+    });
+    
+   // browserSync.watch('./*.*').on('change', browserSync.reload);
 });
 
+gulp.task('watch',  () => {
+    gulp.watch('./public/sass/**/*.scss').on('change', gulp.parallel('sass'));
+    //gulp.watch('./views/**/*.pug').on('change', browserSync.reload);
+    
+    //gulp.watch('./views/**/*.pug', ['pug']);
+    gulp.watch(['./**/*.*'] ).on('change', browserSync.reload);
+});
 
-gulp.task('default', ['browser-sync', 'watch']);
+gulp.task('default', gulp.parallel('watch', 'browser-sync', 'nodemon') );

@@ -217,3 +217,20 @@
         top: 72%;
     }
 }
+
+.form__select {
+    position: relative;
+    color: #757575; 
+    &:after {
+        content: "";
+        position: absolute;
+        display: inline-block;
+        z-index: 10;
+        width: 7px;
+        height: 7px;
+        border-right: 1px solid grey;
+        border-top: 1px solid grey;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+}
