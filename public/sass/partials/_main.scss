@@ -126,14 +126,26 @@ html{
 body {
     background: #ececec;
 }
+//sticky footer
+html, body {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+}
+.content {
+    flex: 1 0 auto;
+}
 
 .main {
+    margin-top: calc( var( --header-height ) + 5% );
+    margin-bottom: 100px;
     height: 100%;
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    margin-top: calc( var( --header-height ) + 5% );
 }
 
 .modal {

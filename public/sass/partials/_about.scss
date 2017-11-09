@@ -1,0 +1,18 @@
+.modal.about, .modal.issues {
+  max-width: 960px;
+}
+
+.about__body {
+  font-family: var(--font-light);
+  line-height: 48px;
+  font-weight: 300;
+}
+
+.about__body{
+
+  @include phones {
+    line-height: 26px;
+		padding-right: rem(10px);
+		padding-left: rem(10px);            
+	}
+}

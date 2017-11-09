@@ -67,9 +67,17 @@ exports.developmentErrors = (err, req, res, next) => {
   No stacktraces are leaked to user
 */
 exports.productionErrors = (err, req, res, next) => {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+
+  if ( err.status === 404) {
+    res.status(400);
+    res.render('404', { title: 'Страница не найдена'});
+  } else {
+    res.status(err.status || 500);
+    res.render('error', {
+      message: err.message,
+      error: {}
+    });
+  }
+  
+
 };

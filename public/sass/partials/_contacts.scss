@@ -1,12 +1,16 @@
-.contacts {
+.contacts, .about {
   font-family: var(--main-fonts);
 }
 
-.contacts__header {
+.contacts__header, 
+.about__header, 
+.issues__header {
   @include headerModal();
 }
 
-.contacts__title {
+.contacts__title, 
+.about__title, 
+.issues__title {
   @include titleModal();
 }
 
@@ -14,8 +18,15 @@
   font-size: 14px;
 }
 
-.contacts__body {
+.contacts__body, 
+.about__body, 
+.issues__body {
   padding: 0 rem(110px);
+
+  @include phones {
+		padding-right: rem(30px);
+		padding-left: rem(30px);            
+	}
 }
 
 .social {

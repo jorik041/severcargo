@@ -130,4 +130,10 @@ router.post('/account/sender',
 router.get('/contacts', controllers.contacts);
 router.get('/top', catchErrors(controllers.getTopDrivers));
 
+//about
+router.get('/about', controllers.about);
+//
+router.get('/issues', controllers.issues);
+
+
 module.exports = router;

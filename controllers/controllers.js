@@ -208,3 +208,11 @@ exports.getTopDrivers = async (req, res) => {
     //res.json(drivers);
     res.render('topDrivers', { drivers, title: 'Топ' });
 }
+
+exports.about = (req, res) => {
+    res.render('about', { title: 'О проекте' })
+}
+
+exports.issues = (req, res) => {
+    res.render('issues', { title: 'Часто задаваемые вопросы'})
+}

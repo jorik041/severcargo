@@ -10,64 +10,69 @@ html(lang="ru")
         link(rel="stylesheet", href="/dist/css/style.css")
     block params
     body( class =`${ bg ? 'bg':'' }`)
-        block header
-            header.header
-                if user
-                    .burger-container.js-burger
-                        .burger
-                            span &nbsp;
-                            span &nbsp;
-                            span &nbsp;
-                        nav.nav
-                            ul.nav__list
-                                li
-                                    a(href=`/${ user.account }/${ user.slug}`) Личный кабинет
-                                li
-                                    a(href="") Контакты
-                                li
-                                    a(href="") О проекте
-                                li
-                                    a(href="") FAQ
-                                li
-                                    a(href="/search").on-mibile Найти рейсы
-                    .nav-overlay        
-                .header__logo
-                    h1
-                        a(href="/")  
-                            img(src="/images/logo.png", alt="")
-                            span северкарго
-                .user
+        .content
+            block header
+                header.header
                     if user
-                        if user.account == "driver"
-                            a(href="/add-flight").user__add.button Добавить рейс
-                        span.header__search
-                            !=  h.icon('search')
-                            a(href="/search").user__search Найти рейс
-                        .user__info
-                            .user__name #{ user.name }
-                            .user__ava-wrapper.js-show-header-menu
-                                .user__ava    
-                                    img(src=`/uploads/${ user.photo }`, alt=`${user.account == "driver" ? "Водитель": "Отправитель" }`, class="ava-preview")
-                                .user__profile-menu
-                                    ul.profile-menu__list
-                                        li
-                                            a(href=`/${ user.account }/${ user.slug}`) Личный кабинет
-                                        li
-                                            a(href="/logout").user__logout Выйти
-                    else
-                        .user-wrapper
-                            a(href="/register").user__register Регистрация
-                            a(href="/login").user__login Войти
-        block messages
-            if locals.flashes
-                .inner
-                    .flash-messages
-                        - const categories = Object.keys(locals.flashes)
-                        each category in categories
-                            each message in flashes[category]
-                                .flash(class=`flash--${category}`)
-                                    p.flash__text!= message
-                                    button.flash__remove(onClick="this.parentElement.remove()") &times;
-        block content
+                        .burger-container.js-burger
+                            .burger
+                                span &nbsp;
+                                span &nbsp;
+                                span &nbsp;
+                            nav.nav
+                                ul.nav__list
+                                    li
+                                        a(href=`/${ user.account }/${ user.slug}`) Личный кабинет
+                                    li
+                                        a(href="") Контакты
+                                    li
+                                        a(href="/about") О проекте
+                                    li
+                                        a(href="/search").on-mibile Найти рейсы
+                        .nav-overlay        
+                    .header__logo
+                        h1
+                            a(href="/")  
+                                img(src="/images/logo.png", alt="")
+                                span северкарго
+                    .user
+                        if user
+                            if user.account == "driver"
+                                a(href="/add-flight").user__add.button Добавить рейс
+                            span.header__search
+                                !=  h.icon('search')
+                                a(href="/search").user__search Найти рейс
+                            .user__info
+                                .user__name #{ user.name }
+                                .user__ava-wrapper.js-show-header-menu
+                                    .user__ava    
+                                        img(src=`/uploads/${ user.photo }`, alt=`${user.account == "driver" ? "Водитель": "Отправитель" }`, class="ava-preview")
+                                    .user__profile-menu
+                                        ul.profile-menu__list
+                                            li
+                                                a(href=`/${ user.account }/${ user.slug}`) Личный кабинет
+                                            li
+                                                a(href="/logout").user__logout Выйти
+                        else
+                            .user-wrapper
+                                a(href="/register").user__register Регистрация
+                                a(href="/login").user__login Войти
+            block messages
+                if locals.flashes
+                    .inner
+                        .flash-messages
+                            - const categories = Object.keys(locals.flashes)
+                            each category in categories
+                                each message in flashes[category]
+                                    .flash(class=`flash--${category}`)
+                                        p.flash__text!= message
+                                        button.flash__remove(onClick="this.parentElement.remove()") &times;
+            block content
+        footer.footer
+            .footer__copyright 2017 &copy; Северкарго, Severcargo.ru
+            ul.footer__list
+                li: a.footer__link(href='/about') О нас
+                li: a.footer__link(href='/contacts') Контакты
+                li: a.footer__link(href='/issues') Часто задаваемые вопросы
         script(src="../../js/main.js")
     block scripts

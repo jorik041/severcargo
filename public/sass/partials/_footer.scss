@@ -1,0 +1,43 @@
+.footer {
+  padding: 15px 30px;
+  width: 100%;
+  background-color: var(--header-color);
+  font-family: var(--font-light);
+  color: #fff;
+}
+
+.footer__copyright {
+  display: inline-block;
+  font-size: 14px;  
+  
+  @include tablets {
+    margin-bottom: 15px;
+    display: block;
+  }
+}
+
+.footer__list {
+  margin: 0;
+  display: inline-flex;
+
+  @include tablets {
+    padding: 0;
+  }
+
+  @include phones {
+    flex-direction: column;
+  }
+
+  li {
+    padding-right: 15px;
+    font-size: 14px;
+
+    @include phones {
+      margin-bottom: 15px;
+    }
+  }
+
+  li:last-child {
+    padding-right: 0;
+  }
+}
